@@ -29,7 +29,6 @@ public class Sprite extends GenericItem implements Drawable {
 		this.duration = new SpriteDuration();
 		this.spriteLength = spriteLength;
 		this.currentImage = this.builder.append(baseId).append(this.currentSprite).toString();
-		System.err.println(this.currentImage );
 	}
 
 	public void moveSprite() {

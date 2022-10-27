@@ -28,8 +28,6 @@ public class Bullet {
     	// Divide the speed between the delta time(each dt represents a portion of game time, something like delta seconds)
         x += lengthdir_x(speed/dt, direction);
         y += lengthdir_y(speed/dt, direction);
-        
-        //System.out.println("X: " + x + ", Y: " + y);
     }
     
     public void paintBullet(Graphics g) {

@@ -107,7 +107,7 @@ public enum ImageId {
 	LOADING3_L,
 	LOADING3_C,
 	LOADING3_R,
-	LOADING_BAR,
+	LOADING_TABLE,
 	
 	// Main menu folder
 	BG,
