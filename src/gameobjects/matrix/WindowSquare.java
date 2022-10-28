@@ -20,8 +20,10 @@ public class WindowSquare {
 		this.point = new Point(x, y);
 	}
 	
-	public void addInternalMatrix(WindowMatrix matrix) {
+	public WindowSquare addInternalMatrix(WindowMatrix matrix) {
 		this.internalMatrix = matrix;
+		
+		return this;
 	}
 	
 	public WindowMatrix getMatrix() {

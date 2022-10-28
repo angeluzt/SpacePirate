@@ -29,9 +29,9 @@ public class Pause extends GenericGui implements Clickable {
 		ImageManager.addImage(ImageId.PAUSE_WINDOW, new Size(400, 600));
 
 		WindowMatrix sections = new WindowMatrix();
-		sections.addColumn(100f / 3, 2, this.getPointInWindow(), this.getSizeInWindow());
-		sections.addColumn(100f / 3, 1, this.getPointInWindow(), this.getSizeInWindow());
-		sections.addColumn(100f / 3, 4, this.getPointInWindow(), this.getSizeInWindow());
+		sections.addRow(100f / 3, 2, this.getPointInWindow(), this.getSizeInWindow());
+		sections.addRow(100f / 3, 1, this.getPointInWindow(), this.getSizeInWindow());
+		sections.addRow(100f / 3, 4, this.getPointInWindow(), this.getSizeInWindow());
 		this.getInternalSquare().addInternalMatrix(sections);
 		
 		WindowSquare currentSquare = this.getInternalSquare().getMatrix().getRowByIndex(2).getSquare(0);
@@ -97,6 +97,8 @@ public class Pause extends GenericGui implements Clickable {
 					Trigonometry.centerSquareInsideanother(externalPoint, externalSize, newSize), 
 					newSize.getSize()
 				);
+		
+		this.setInternalSquare(null);
 	}
 
 	@Override

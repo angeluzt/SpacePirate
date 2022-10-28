@@ -17,6 +17,7 @@ import gameobjects.gui.Pause;
 import gameobjects.gui.Purchase;
 import gameobjects.loadingbar.LoadingBar;
 import gameobjects.sprites.Sprite;
+import gameobjects.window.MainMenuWindow;
 import utils.Constants;
 import utils.ImageManager;
 import utils.ImageUtils;
@@ -46,6 +47,8 @@ public class CanvasForm extends JComponent implements Clickable  {
 	Accept accept;
 	Purchase purchase;
 	
+	MainMenuWindow menu = new MainMenuWindow(new Point(0, 0), new Size(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
+	
 	private static final long serialVersionUID = 1L;
 
 	public CanvasForm() {
@@ -65,9 +68,9 @@ public class CanvasForm extends JComponent implements Clickable  {
 		}
 		spriteUfo = new Sprite("Ufo_Regular_A_Explosion_", (short)9, new Point(800, 200), new Size(100, 400));
 		
-		for(int i = 0; i < 360; i++) {
+		/*for(int i = 0; i < 360; i++) {
 			this.bullets.add(new Bullet(800, 500, i, 5));
-		}
+		}*/
 
 		ImageManager.addImage(ImageId.CLOSE_BTN, new Size(200, 200));
 		ImageManager.addImage(ImageId.CLOSE_ACT_BTN, new Size(200, 200));
@@ -83,10 +86,10 @@ public class CanvasForm extends JComponent implements Clickable  {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 		
-		g.setColor(Color.RED);
-		for(int i = 0; i < this.bullets.size(); i++) {
+		//g.setColor(Color.RED);
+		/*for(int i = 0; i < this.bullets.size(); i++) {
 			this.bullets.get(i).paintBullet(g);
-		}
+		}*/
 		
 		this.button.drawElement(g);
 		this.button1.drawElement(g);
@@ -97,14 +100,16 @@ public class CanvasForm extends JComponent implements Clickable  {
 		this.pause.drawElement(g);
 		this.accept.drawElement(g);
 		this.purchase.drawElement(g);
+		
+		this.menu.drawElement(g);
 	}
 
 	public void tick(double dt) {
 		double dtStep = vx/dt;
 	
-		for(int i = 0; i < this.bullets.size(); i++) {
+		/*for(int i = 0; i < this.bullets.size(); i++) {
 			this.bullets.get(i).update(dtStep);
-		}
+		}*/
 		
 		this.sprite.moveSprite();
 		this.spriteUfo.moveSprite();

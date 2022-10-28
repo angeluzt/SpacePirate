@@ -12,6 +12,7 @@ import gameobjects.matrix.WindowRow;
 import gameobjects.matrix.WindowSquare;
 import utils.ImageManager;
 import utils.Size;
+import utils.Utils;
 
 public class GenericGui extends GenericItem implements Drawable {
 
@@ -131,22 +132,7 @@ public class GenericGui extends GenericItem implements Drawable {
 				this.getSize().height, null);
 
 		if(internalSquare != null) {
-			this.drawGridSystem(g, internalSquare.getMatrix());
-		}
-	}
-	
-	public void drawGridSystem(Graphics g, WindowMatrix matrix) {
-		if(matrix != null && matrix.getMatrix().size() > 0) {
-			g.setColor(Color.GREEN);
-			for (WindowRow row: matrix.getMatrix()) {
-				for (WindowSquare square : row.getSquares()) {
-					g.drawRect((int) square.getPoint().getX(), (int)square.getPoint().getY(), square.getSize().width, square.getSize().height);
-					
-					if(square.getMatrix() != null) {
-						drawGridSystem(g, square.getMatrix());
-					}
-				}
-			}
+			Utils.drawGridSystem(g, internalSquare.getMatrix());
 		}
 	}
 

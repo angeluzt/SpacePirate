@@ -6,7 +6,6 @@ import java.awt.Point;
 import commoninterfaces.Clickable;
 import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
-import gameobjects.button.Icon;
 import gameobjects.matrix.WindowMatrix;
 import gameobjects.matrix.WindowSquare;
 import utils.ImageManager;
@@ -25,8 +24,8 @@ public class Information extends GenericGui implements Clickable {
 		ImageManager.addImage(ImageId.PAUSE_WINDOW, new Size(400, 600));
 
 		WindowMatrix sections = new WindowMatrix();
-		sections.addColumn(70f, 1, this.getPointInWindow(), this.getSizeInWindow());
-		sections.addColumn(30f, 3, this.getPointInWindow(), this.getSizeInWindow());
+		sections.addRow(70f, 1, this.getPointInWindow(), this.getSizeInWindow());
+		sections.addRow(30f, 3, this.getPointInWindow(), this.getSizeInWindow());
 		this.getInternalSquare().addInternalMatrix(sections);
 		
 		WindowSquare currentSquare = this.getInternalSquare().getMatrix().getRowByIndex(1).getSquare(0);
@@ -56,6 +55,8 @@ public class Information extends GenericGui implements Clickable {
 					Trigonometry.centerSquareInsideanother(externalPoint, externalSize, newSize), 
 					newSize.getSize()
 				);
+		
+		this.setInternalSquare(null);
 	}
 
 	@Override
