@@ -15,22 +15,28 @@ public class ButtonWithActive extends GenericButton {
 		super(imageId, location, size);
 		
 		this.imageActiveId = imageActiveId;
+
+		ImageManager.addImage(imageActiveId, size);
 	}
 	
 	public void drawElement(Graphics g) {
 		if(!this.isAnimationActive) {
 			g.drawImage(ImageManager.getImage(this.imageId), 
 					(int)this.getPoint().getX(), 
-					(int)this.getPoint().getY(), 
-					this.getSize().getWidth(), 
-					this.getSize().getHeight(), null);
+					(int)this.getPoint().getY(), null);
 		} else {
+			// Scaling is required here
 			g.drawImage(ImageManager.getImage(this.imageActiveId), 
 					(int)this.getPoint().getX(), 
-					(int)this.getPoint().getY(), 
-					this.getSize().getWidth(), 
-					this.getSize().getHeight(), null);
+					(int)this.getPoint().getY(),
+					this.getSize().getWidth(),
+					this.getSize().height,
+					null);
 		}
+	}
+	
+	public ImageId getImageId() {
+		return imageActiveId;
 	}
 
 }

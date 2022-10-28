@@ -47,9 +47,7 @@ public class Sprite extends GenericItem implements Drawable {
 		if(ImageManager.getSpriteImage(this.currentImage) != null) {
 			g.drawImage(ImageManager.getSpriteImage(this.currentImage), 
 					(int)this.getPoint().getX(), 
-					(int)this.getPoint().getY(), 
-					this.getSize().getWidth(), 
-					this.getSize().getHeight(), null);
+					(int)this.getPoint().getY(), null);
 		}
 
 	}

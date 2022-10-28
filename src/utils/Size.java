@@ -2,9 +2,13 @@ package utils;
 
 public class Size {
 
-	private int width;
-	private int height;
+	public int width;
+	public int height;
 	
+	public Size() {
+		
+	}
+
 	public Size(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -23,7 +27,7 @@ public class Size {
 		this.height = height;
 	}
 	
-	public Size getCloneSize() {
+	public Size getSize() {
 		return new Size(this.width, this.height);
 	}
 }

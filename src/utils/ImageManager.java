@@ -10,13 +10,16 @@ public final class ImageManager {
 	public final static HashMap<ImageId, Image> GUI_IMAGES = new HashMap<>();
 	public final static HashMap<String, Image> SPRITES = new HashMap<>();
 	
-	private ImageManager() {
-		
+	// Handle regular images and icons
+	public static void addImage(ImageId imageId, Size size) {
+		if(!GUI_IMAGES.containsKey(imageId)) 
+			GUI_IMAGES.put(imageId, ImageUtils.getImageUtils().readRegularImage(imageId.getPath(), size.width, size.height));
 	}
 	
-	public static void addImage(ImageId imageId, String path, Size size) {
+	// Handle regular images and icons
+	public static void addSmoothImage(ImageId imageId, Size size) {
 		if(!GUI_IMAGES.containsKey(imageId)) 
-			GUI_IMAGES.put(imageId, ImageUtils.getImageUtils().readImageDefault(path, size.getWidth(), size.getHeight()));
+			GUI_IMAGES.put(imageId, ImageUtils.getImageUtils().readSmoothImage(imageId.getPath(), size.width, size.height));
 	}
 	
 	public static void removeImage(ImageId imageId) {
@@ -27,9 +30,10 @@ public final class ImageManager {
 		return GUI_IMAGES.get(imageId);
 	}
 
+	// Handle sprite images
 	public static void addSpriteImage(String imageId, String path, Size size) {
 		if(!SPRITES.containsKey(imageId)) 
-			SPRITES.put(imageId, ImageUtils.getImageUtils().readImageSmooth(path, size.getWidth(), size.getHeight()));
+			SPRITES.put(imageId, ImageUtils.getImageUtils().readSmoothImage(path, size.width, size.height));
 	}
 	
 	public static void removeSpriteImage(String imageId) {

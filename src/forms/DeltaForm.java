@@ -13,8 +13,8 @@ public class DeltaForm extends JFrame implements Runnable, MouseListener {
 	private static final long serialVersionUID = 1L;
 	CanvasForm gameManager;
 	
-	private final double FPS = 60D;
-	private final double UPS = 60D;
+	private final double FPS = 40D;
+	private final double UPS = 30D;
 	
 	private final double timeFps = Constants.NANO_SECOND / FPS;
 	private final double timeUps = Constants.NANO_SECOND / UPS;
@@ -69,6 +69,7 @@ public class DeltaForm extends JFrame implements Runnable, MouseListener {
 	        // UPS
 		    if(this.deltaUps >= 1){
 
+		    	//long startTime = System.nanoTime();
 		    	// Calculate the delta time (local time between each step)
 		    	// the figures will move the same amount of distance in 1 UPS or 300 UPS
 		    	currentStep += Constants.NANO_SECOND;
@@ -82,6 +83,9 @@ public class DeltaForm extends JFrame implements Runnable, MouseListener {
 			    }
 		    	
 		    	this.deltaUps = 0;
+		        //long elapsedTime = System.nanoTime() - startTime;
+
+		        //System.out.println("Total execution time to create 1000K objects in Java in millis: " + elapsedTime/1000000);
 		    }
 
 	        // FPS

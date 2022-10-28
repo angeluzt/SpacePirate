@@ -7,12 +7,16 @@ import java.awt.Point;
 import commoninterfaces.Drawable;
 import enums.ImageId;
 import gameobjects.GenericItem;
+import gameobjects.matrix.WindowMatrix;
+import gameobjects.matrix.WindowRow;
+import gameobjects.matrix.WindowSquare;
 import utils.ImageManager;
 import utils.Size;
 
 public class GenericGui extends GenericItem implements Drawable {
 
 	private ImageId windowId;
+	private ImageId windowTitle;
 	private WindowSquare internalSquare;
 
 	private Point pointInWindow;
@@ -23,20 +27,20 @@ public class GenericGui extends GenericItem implements Drawable {
 		this.windowId = imageId;
 		
 		this.pointInWindow = new Point(
-				(int)(this.getPoint().getX() + (this.getSize().getWidth() * xPercent)), 
-				(int)(this.getPoint().getY() + (this.getSize().getHeight() * yPercent))
+				(int)(this.getPoint().getX() + (this.getSize().width * xPercent)), 
+				(int)(this.getPoint().getY() + (this.getSize().height * yPercent))
 		);
 
 		this.sizeInWindow = new Size(
-				(int)(this.getSize().getWidth() - (this.getSize().getWidth() * xPercent) * 2), 
-				(int)(this.getSize().getHeight() - (this.getSize().getHeight() * downPercent))
+				(int)(this.getSize().width - (this.getSize().width * xPercent) * 2), 
+				(int)(this.getSize().height - (this.getSize().height * downPercent))
 		);
 		
 		// TODO: Delete once testing is completed
-		ImageManager.addImage(imageId, "/Images/Gui/Pause/Window.png", new Size(400, 600));
+		//ImageManager.addImage(imageId, "/Images/Gui/Pause/Window.png", new Size(400, 600));
 
 		// Upgrade
-		internalSquare = new WindowSquare(this.pointInWindow, this.sizeInWindow); 
+		/*internalSquare = new WindowSquare(this.pointInWindow, this.sizeInWindow); 
 		WindowMatrix sections = new WindowMatrix();
 		//sections.addColumn(100f, 3, this.getPointInWindow(), this.getSizeInWindow());
 		sections.addColumn(100f / 5, 1, this.getPointInWindow(), this.getSizeInWindow());
@@ -44,21 +48,21 @@ public class GenericGui extends GenericItem implements Drawable {
 		sections.addColumn(100f / 5, 1, this.getPointInWindow(), this.getSizeInWindow());
 		sections.addColumn(100f / 5, 1, this.getPointInWindow(), this.getSizeInWindow());
 		sections.addColumn(100f / 5, 2, this.getPointInWindow(), this.getSizeInWindow());
-		
-		this.internalSquare.addInternalMatrix(sections);
-		/*// Hangar
+		this.internalSquare.addInternalMatrix(sections);*/
+
+		// Hangar
 		internalSquare = new WindowSquare(this.pointInWindow, this.sizeInWindow); 
-		WindowMatrix sections = new WindowMatrix();
+		/*WindowMatrix sections = new WindowMatrix();
 		sections.addColumn(100f * 0.5f, 2, this.getPointInWindow(), this.getSizeInWindow());
 		sections.addColumn(100f * 0.25f, 1, this.getPointInWindow(), this.getSizeInWindow());
 		sections.addColumn(100f * 0.25f, 4, this.getPointInWindow(), this.getSizeInWindow());
 		
-		this.internalSquare.addInternalMatrix(sections);
+		this.internalSquare.addInternalMatrix(sections);*/
 		
-		Point buttonsPoint = internalSquare.getMatrix().getRowByIndex(0).getSquare(1).getPoint().getLocation();
-		Size buttonsSize = internalSquare.getMatrix().getRowByIndex(0).getSquare(1).getSize().getCloneSize();
+		//Point buttonsPoint = internalSquare.getMatrix().getRowByIndex(0).getSquare(1).getPoint().getLocation();
+		//Size buttonsSize = internalSquare.getMatrix().getRowByIndex(0).getSquare(1).getSize().getSize();
 		
-		WindowSquare buttons = new WindowSquare(buttonsPoint, buttonsSize);
+		/*WindowSquare buttons = new WindowSquare(buttonsPoint, buttonsSize);
 		WindowMatrix buttonsMatrix = new WindowMatrix();
 			buttonsMatrix.addColumn(17.5f, 1, buttonsPoint, buttonsSize);
 			buttonsMatrix.addColumn(17.5f, 1, buttonsPoint, buttonsSize);
@@ -68,12 +72,11 @@ public class GenericGui extends GenericItem implements Drawable {
 
 		buttons.addInternalMatrix(buttonsMatrix);
 
-		internalSquare.getMatrix().getRowByIndex(0).getSquare(1).addInternalMatrix(buttonsMatrix);
-		*/
+		internalSquare.getMatrix().getRowByIndex(0).getSquare(1).addInternalMatrix(buttonsMatrix);*/
 		
 		// Pause
-		/*internalSquare = new WindowSquare(this.pointInWindow, this.sizeInWindow); 
-		WindowMatrix sections = new WindowMatrix();
+		//internalSquare = new WindowSquare(this.pointInWindow, this.sizeInWindow); 
+		/*WindowMatrix sections = new WindowMatrix();
 		sections.addColumn(100f / 3, 2, this.getPointInWindow(), this.getSizeInWindow());
 		sections.addColumn(100f / 3, 1, this.getPointInWindow(), this.getSizeInWindow());
 		sections.addColumn(100f / 3, 4, this.getPointInWindow(), this.getSizeInWindow());
@@ -124,11 +127,8 @@ public class GenericGui extends GenericItem implements Drawable {
 		g.drawImage(ImageManager.getImage(this.windowId), 
 				(int)this.getPoint().getX(), 
 				(int)this.getPoint().getY(), 
-				this.getSize().getWidth(), 
-				this.getSize().getHeight(), null);
-		
-		//g.setColor(Color.BLUE);
-		//g.fillRect((int)this.pointInWindow.getX(), (int)pointInWindow.getY(), sizeInWindow.getWidth(), sizeInWindow.getHeight());
+				this.getSize().width, 
+				this.getSize().height, null);
 
 		if(internalSquare != null) {
 			this.drawGridSystem(g, internalSquare.getMatrix());
@@ -140,8 +140,7 @@ public class GenericGui extends GenericItem implements Drawable {
 			g.setColor(Color.GREEN);
 			for (WindowRow row: matrix.getMatrix()) {
 				for (WindowSquare square : row.getSquares()) {
-					//int x = square.get, y;
-					g.drawRect((int) square.getPoint().getX(), (int)square.getPoint().getY(), square.getSize().getWidth(), square.getSize().getHeight());
+					g.drawRect((int) square.getPoint().getX(), (int)square.getPoint().getY(), square.getSize().width, square.getSize().height);
 					
 					if(square.getMatrix() != null) {
 						drawGridSystem(g, square.getMatrix());
@@ -150,4 +149,29 @@ public class GenericGui extends GenericItem implements Drawable {
 			}
 		}
 	}
+
+	public ImageId getWindowId() {
+		return windowId;
+	}
+
+	public void setWindowId(ImageId windowId) {
+		this.windowId = windowId;
+	}
+
+	public WindowSquare getInternalSquare() {
+		return internalSquare;
+	}
+
+	public void setInternalSquare(WindowSquare internalSquare) {
+		this.internalSquare = internalSquare;
+	}
+
+	public void setPointInWindow(Point pointInWindow) {
+		this.pointInWindow = pointInWindow;
+	}
+
+	public void setSizeInWindow(Size sizeInWindow) {
+		this.sizeInWindow = sizeInWindow;
+	}
+	
 }

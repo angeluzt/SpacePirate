@@ -1,4 +1,4 @@
-package gameobjects.gui;
+package gameobjects.matrix;
 
 import java.awt.Point;
 import java.util.ArrayList;

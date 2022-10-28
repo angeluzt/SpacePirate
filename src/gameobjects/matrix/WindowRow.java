@@ -1,4 +1,4 @@
-package gameobjects.gui;
+package gameobjects.matrix;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -14,8 +14,8 @@ public class WindowRow {
 			throw new ArithmeticException("[WindowRow][constructor] elements cannot be zero");
 		}
 
-		float itemWidth = (windowSize.getWidth() / elements);
-		float itemHeight = (windowPercent * windowSize.getHeight()) / 100;
+		float itemWidth = (windowSize.width / elements);
+		float itemHeight = (windowPercent * windowSize.height) / 100;
 
 		for (int i = 0; i < elements; i++) {
 			WindowSquare section = 
@@ -39,7 +39,7 @@ public class WindowRow {
 		WindowSquare current = this.squares.get(0);
 		
 		if(current != null) {
-			return (int)current.getPoint().getY() + (int)current.getSize().getHeight();
+			return (int)current.getPoint().getY() + (int)current.getSize().height;
 		} else {
 			return 0;
 		}
