@@ -13,7 +13,7 @@ public class Bounds {
 	}
 	
 	public Size getScaledSize(float widthPercent, float heightPercent) {
-		return new Size((int)(widthPercent * size.height) / 100, (int)(heightPercent * size.height) / 100);
+		return new Size((int)(widthPercent * size.width) / 100, (int)(heightPercent * size.height) / 100);
 	}
 	
 	public Point getLocation() {

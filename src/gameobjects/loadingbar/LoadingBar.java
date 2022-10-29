@@ -69,6 +69,11 @@ public class LoadingBar extends GenericItem implements Drawable {
 
 	@Override
 	public void drawElement(Graphics g) {
+
+		if(!this.isVisible()) {
+			return;
+		}
+
 		g.drawImage(ImageManager.getImage(this.table), 
 				(int)this.getPoint().getX(), 
 				(int)this.getPoint().getY(), null);

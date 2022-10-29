@@ -2,19 +2,85 @@ package enums;
 
 public enum ImageId {
 
-	// Accept folder
-	ACCEPT_TXT("/Images/Gui/Accept/Accept.png"),
-	INFORMATION("/Images/Gui/Accept/Information.png"),
-	PURCHASE("/Images/Gui/Accept/Purchase.png"),
+	// window accept
+	WINDOW_ACCEPT_HEADER_TXT("/Images/Gui/Accept/Accept.png"),// TXT
 	WINDOW_ACCEPT_CLOSE_BTN("/Images/Gui/Buttons/Btns/Close_BTN.png"),
-	WINDOW_ACCEPT_CLOSE_A_BTN("/Images/Gui/Buttons/Btns_Active/Close_BTN.png"),
-	WINDOW_ACCEPT_BTN("/Images/Gui/Buttons/Btns/Ok_BTN.png"),
-	WINDOW_ACCEPT_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Ok_BTN.png"),
+	WINDOW_ACCEPT_CLOSE_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Close_BTN.png"),
+	WINDOW_ACCEPT_OK_BTN("/Images/Gui/Buttons/Btns/Ok_BTN.png"),
+	WINDOW_ACCEPT_OK_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Ok_BTN.png"),
 	WINDOW_ACCEPT_FAQ_BTN("/Images/Gui/Buttons/Btns/FAQ_BTN.png"),
 	WINDOW_ACCEPT_FAQ_ACT_BTN("/Images/Gui/Buttons/Btns_Active/FAQ_BTN.png"),
-	WINDOW_ACCEPT_TABLE("/Images/Gui/Accept/Table.png"),
+	WINDOW_ACCEPT_WINDOW("/Images/Gui/Accept/Window.png"),
+	
+	// window purchase
+	WINDOW_PURCHASE_HEADER_TXT("/Images/Gui/Accept/Purchase.png"),// TXT
+	WINDOW_PURCHASE_CLOSE_BTN("/Images/Gui/Buttons/Btns/Close_BTN.png"),// BTN
+	WINDOW_PURCHASE_CLOSE_A_BTN("/Images/Gui/Buttons/Btns_Active/Close_BTN.png"), 
+	WINDOW_PURCHASE_OK_BTN("/Images/Gui/Buttons/Btns/Ok_BTN.png"),
+	WINDOW_PURCHASE_OK_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Ok_BTN.png"),
+	WINDOW_PURCHASE_FAQ_BTN("/Images/Gui/Buttons/Btns/FAQ_BTN.png"),
+	WINDOW_PURCHASE_FAQ_ACT_BTN("/Images/Gui/Buttons/Btns_Active/FAQ_BTN.png"),
+	WINDOW_PURCHASE_TABLE("/Images/Gui/Accept/Table.png"),// OTHERS
+	WINDOW_PURCHASE_WINDOW("/Images/Gui/Accept/Window.png"),
+	
+	// window information
+	WINDOW_INFO_HEADER_TXT("/Images/Gui/Accept/Information.png"),// TXT
+	WINDOW_INFO_CLOSE_BTN("/Images/Gui/Buttons/Btns/Close_BTN.png"),// BTN
+	WINDOW_INFO_CLOSE_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Close_BTN.png"),
+	WINDOW_INFO_OK_BTN("/Images/Gui/Buttons/Btns/Ok_BTN.png"),
+	WINDOW_INFO_OK_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Ok_BTN.png"),
+	WINDOW_INFO_FAQ_BTN("/Images/Gui/Buttons/Btns/FAQ_BTN.png"),
+	WINDOW_INFO_FAQ_ACT_BTN("/Images/Gui/Buttons/Btns_Active/FAQ_BTN.png"),
+	WINDOW_INFO_WINDOW("/Images/Gui/Accept/Window.png"), //others
+	WINDOW_INFO_CRISTAL_ICON("/Images/Gui/Accept/Cristal_Icon.png"),
+	
+	// window pause
+	WINDOW_PAUSE_HEADER_TXT("/Images/Gui/Pause/Header.png"),// TXT
+	WINDOW_PAUSE_SCORE_TXT("/Images/Gui/Pause/Score.png"),
+	WINDOW_PAUSE_HANGAR_BTN("/Images/Gui/Buttons/Btns/Hangar_BTN.png"),// BTN
+	WINDOW_PAUSE_HANGAR_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Hangar_BTN.png"),
+	WINDOW_PAUSE_MAP_BTN("/Images/Gui/Pause/Map_BTN.png"),
+	WINDOW_PAUSE_MENU_BTN("/Images/Gui/Buttons/Btns/Menu_BTN.png"),
+	WINDOW_PAUSE_MENU_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Menu_BTN.png"),
+	WINDOW_PAUSE_PAUSE_BTN("/Images/Gui/Buttons/Btns/Ok_BTN.png"),
+	WINDOW_PAUSE_PAUSE_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Ok_BTN.png"),
+	WINDOW_PAUSE_OK_BTN("/Images/Gui/Buttons/Btns/Ok_BTN.png"),
+	WINDOW_PAUSE_OK_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Ok_BTN.png"),
+	WINDOW_PAUSE_SETINGS_BTN("/Images/Gui/Buttons/Btns/Settings_BTN.png"),
+	WINDOW_PAUSE_SETINGS_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Settings_BTN.png"),
+	WINDOW_PAUSE_PAUSE_TABLE("/Images/Gui/Pause/Table.png"),//others
+	WINDOW_PAUSE_PAUSE_WINDOW("/Images/Gui/Pause/Window.png"),
 
-	// Buttons folder
+	// window you win/lose
+	WINDOW_WINER_HEADER_WIN_TXT("/Images/Gui/You_Win/Header_Win.png"),// TXT
+	WINDOW_WINER_HEADER_LOSE_TXT("/Images/Gui/You_Win/Header_Lose.png"),
+	WINDOW_WINER_RECORD_TXT("/Images/Gui/You_Win/Record.png"),
+	WINDOW_WINER_SCORE_TXT("/Images/Gui/You_Win/Score.png"),
+	WINDOW_WINER_REPLAY_BTN("/Images/Gui/Buttons/Btns/Replay_BTN.png"),// BTN
+	WINDOW_WINER_REPLAY_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Replay_BTN.png"),
+	WINDOW_WINER_PLAY_BTN("/Images/Gui/Buttons/Btns/Play_BTN.png"),
+	WINDOW_WINER_PLAY_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Play_BTN.png"),
+	WINDOW_WINER_CLOSE_BTN("/Images/Gui/Buttons/Btns/Close_BTN.png"),
+	WINDOW_WINER_CLOSE_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Close_BTN.png"),
+	WINDOW_WINER_TABLE("/Images/Gui/You_Win/Window.png"),//others
+	WINDOW_WINER_WINDOW("/Images/Gui/You_Win/Window.png"),
+	WINDOW_WINER_START1("/Images/Gui/You_Win/Star_1.png"),
+	WINDOW_WINER_START2("/Images/Gui/You_Win/Star_2.png"),
+	WINDOW_WINER_START3("/Images/Gui/You_Win/Star_3.png"),
+
+	// OBJECTS
+	// Loading bars object
+	LOADING1_L("/Images/Gui/Loading_Bar/LoadingBar1_Left.png"),
+	LOADING1_C("/Images/Gui/Loading_Bar/LoadingBar1_Center.png"),
+	LOADING1_R("/Images/Gui/Loading_Bar/LoadingBar1_Right.png"),
+	LOADING2_L("/Images/Gui/Loading_Bar/LoadingBar1_Left.png"),
+	LOADING2_C("/Images/Gui/Loading_Bar/LoadingBar1_Center.png"),
+	LOADING2_R("/Images/Gui/Loading_Bar/LoadingBar1_Right.png"),
+	LOADING3_L("/Images/Gui/Loading_Bar/LoadingBar1_Left.png"),
+	LOADING3_C("/Images/Gui/Loading_Bar/LoadingBar1_Center.png"),
+	LOADING3_R("/Images/Gui/Loading_Bar/LoadingBar1_Right.png"),
+	LOADING_TABLE("/Images/Gui/Loading_Bar/Table.png"),
+	/*// Buttons folder
 	BACKWARD_BTN("/Images/Gui/Buttons/Btns/Backward_BTN.png"),
 	CLOSE_BTN("/Images/Gui/Buttons/Btns/Close_BTN.png"),
 	FAQ_BTN("/Images/Gui/Buttons/Btns/FAQ_BTN.png"),
@@ -103,18 +169,6 @@ public enum ImageId {
 	MANU_TABLE(""),
 	MENU_WINDOW(""),
 	
-	// Loading bars folder
-	LOADING1_L("/Images/Gui/Loading_Bar/LoadingBar1_Left.png"),
-	LOADING1_C("/Images/Gui/Loading_Bar/LoadingBar1_Center.png"),
-	LOADING1_R("/Images/Gui/Loading_Bar/LoadingBar1_Right.png"),
-	LOADING2_L("/Images/Gui/Loading_Bar/LoadingBar1_Left.png"),
-	LOADING2_C("/Images/Gui/Loading_Bar/LoadingBar1_Center.png"),
-	LOADING2_R("/Images/Gui/Loading_Bar/LoadingBar1_Right.png"),
-	LOADING3_L("/Images/Gui/Loading_Bar/LoadingBar1_Left.png"),
-	LOADING3_C("/Images/Gui/Loading_Bar/LoadingBar1_Center.png"),
-	LOADING3_R("/Images/Gui/Loading_Bar/LoadingBar1_Right.png"),
-	LOADING_TABLE("/Images/Gui/Loading_Bar/Table.png"),
-	
 	// Main menu folder
 	BG(""),
 	EXIT_BTN(""),
@@ -143,15 +197,6 @@ public enum ImageId {
 	BOSS_NAME_TABLE(""),
 	CLOCK_ICON(""),
 	CRISTAL_ICON(""),
-	
-	STATS_BAR(""),
-	
-	// Pause folder
-	PAUSE_HEADER("/Images/Gui/Pause/Header.png"),
-	MAP_TXT("/Images/Gui/Pause/Map_BTN.png"),
-	SCORE_TXT("/Images/Gui/Pause/Score.png"),
-	PAUSE_TABLE("/Images/Gui/Pause/Table.png"),
-	PAUSE_WINDOW("/Images/Gui/Pause/Window.png"),
 	
 	// Rating folder
 	RATING_TXT(""),
@@ -200,7 +245,7 @@ public enum ImageId {
 	YOU_LOOSE_WINDOW(""),
 	// You win
 	YOU_WIN_TXT(""),
-	RECORD_TXT("");
+	RECORD_TXT("")*/;
 	
 	private String path;
 	

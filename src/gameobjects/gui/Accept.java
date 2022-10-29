@@ -6,12 +6,10 @@ import java.awt.Point;
 import commoninterfaces.Clickable;
 import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
-import gameobjects.matrix.WindowSquare;
+import gameobjects.button.Icon;
 import utils.Bounds;
-import utils.ImageManager;
 import utils.Size;
 import utils.Trigonometry;
-import utils.Utils;
 
 public class Accept extends GenericGui implements Clickable {
 
@@ -19,8 +17,8 @@ public class Accept extends GenericGui implements Clickable {
 	private ButtonWithActive question;
 	private ButtonWithActive accept;
 	
-	public Accept(Point point, Size size, float xPercent, float yPercent, float downPercent) {
-		super(ImageId.PAUSE_WINDOW, point, size, xPercent, yPercent, downPercent);
+	public Accept(Point point, Size size) {
+		super(ImageId.WINDOW_ACCEPT_WINDOW, point, size);
 
 		this.setShell();
 	}
@@ -28,11 +26,14 @@ public class Accept extends GenericGui implements Clickable {
 	@Override
 	public void drawElement(Graphics g) {
 		super.drawElement(g);
+		
+		if(!this.isVisible()) {
+			return;
+		}
 
 		close.drawElement(g);
 		question.drawElement(g);
 		accept.drawElement(g);
-		Utils.drawGridSystem(g, sections);
 	}
 
 	@Override
@@ -47,24 +48,35 @@ public class Accept extends GenericGui implements Clickable {
 
 	@Override
 	public void setShell() {
-		this.sections = new WindowSquare(this.getPointInWindow(), this.getSizeInWindow());
+		Bounds externalBounds;
+		Size newSize;
 		
 		this.sections
-		.addRow(50, 1)
-		.addRow(50, 3);
-		
+		.addRow(19, 1)
+		.addRow(40.5f, 1)
+		.addRow(40.5f, 3);
+
+		// window title: "accept"
+		externalBounds = this.sections.getRow(0).getSquare(0).getBounds();
+		newSize = externalBounds.getScaledSize(50, 60);
+		Icon title = new Icon(
+				ImageId.WINDOW_ACCEPT_HEADER_TXT,
+				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
+				newSize);
+		this.setWindowHeader(title);
+
 		// Close
-		Bounds externalBounds = this.sections.getRow(1).getSquare(0).getBounds();
-		Size newSize = externalBounds.getScaledSize(60, 60);
+		externalBounds = this.sections.getRow(2).getSquare(0).getBounds();
+		newSize = externalBounds.getScaledSize(60, 60);
 		close = new ButtonWithActive(
 				ImageId.WINDOW_ACCEPT_CLOSE_BTN, 
-				ImageId.WINDOW_ACCEPT_CLOSE_A_BTN, 
+				ImageId.WINDOW_ACCEPT_CLOSE_ACT_BTN, 
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
 		
 		// question
-		externalBounds = this.sections.getRow(1).getSquare(1).getBounds();
+		externalBounds = this.sections.getRow(2).getSquare(1).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		question = new ButtonWithActive(
 				ImageId.WINDOW_ACCEPT_FAQ_BTN, 
@@ -74,11 +86,11 @@ public class Accept extends GenericGui implements Clickable {
 			);
 		
 		// accept
-		externalBounds = this.sections.getRow(1).getSquare(2).getBounds();
+		externalBounds = this.sections.getRow(2).getSquare(2).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		accept = new ButtonWithActive(
-				ImageId.WINDOW_ACCEPT_BTN, 
-				ImageId.WINDOW_ACCEPT_ACT_BTN, 
+				ImageId.WINDOW_ACCEPT_OK_BTN, 
+				ImageId.WINDOW_ACCEPT_OK_ACT_BTN, 
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);

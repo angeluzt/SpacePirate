@@ -7,10 +7,7 @@ import commoninterfaces.Clickable;
 import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
-import gameobjects.matrix.WindowMatrix;
-import gameobjects.matrix.WindowSquare;
 import utils.Bounds;
-import utils.ImageManager;
 import utils.Size;
 import utils.Trigonometry;
 
@@ -22,8 +19,8 @@ public class Purchase extends GenericGui implements Clickable {
 	
 	private Icon amount;
 	
-	public Purchase(Point point, Size size, float xPercent, float yPercent, float downPercent) {
-		super(ImageId.PAUSE_WINDOW, point, size, xPercent, yPercent, downPercent);
+	public Purchase(Point point, Size size) {
+		super(ImageId.WINDOW_PURCHASE_WINDOW, point, size);
 
 		this.setShell();
 	}
@@ -31,61 +28,80 @@ public class Purchase extends GenericGui implements Clickable {
 	@Override
 	public void drawElement(Graphics g) {
 		super.drawElement(g);
-
-		/*close.drawElement(g);
+		
+		if(!this.isVisible()) {
+			return;
+		}
+		
+		close.drawElement(g);
 		question.drawElement(g);
 		accept.drawElement(g);
 		
-		amount.drawElement(g);*/
+		//this.getWindowHeader().drawElement(g);
+
+		//amount.drawElement(g);
 	}
 
 	@Override
 	public boolean isElementClicked(Point point) {
 
-		/*close.isElementClicked(point);
+		close.isElementClicked(point);
 		question.isElementClicked(point);
-		accept.isElementClicked(point);*/
+		accept.isElementClicked(point);
 
 		return false;
 	}
 
 	@Override
 	public void setShell() {
-		this.sections = new WindowSquare(this.getPointInWindow(), this.getSizeInWindow());
+		Bounds externalBounds;
+		Size newSize;
+
+		//this.sections = new WindowSquare(this.getPointInWindow(), this.getSizeInWindow());
 		
 		this.sections
-		.addRow(50, 1)
-		.addRow(50, 3);
+		.addRow(19, 1)
+		.addRow(40.5f, 1)
+		.addRow(40.5f, 3);
 		
-		// Close
-		/*Bounds externalBounds = this.sections.getRow(1).getSquare(0).getBounds();
-		Size newSize = externalBounds.getScaledSize(60, 60);
+		// window title: "purchase"
+		externalBounds = this.sections.getRow(0).getSquare(0).getBounds();
+		newSize = externalBounds.getScaledSize(50, 60);
+		Icon title = new Icon(
+				ImageId.WINDOW_PURCHASE_HEADER_TXT,
+				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
+				newSize);
+		this.setWindowHeader(title);
+		
+		// close
+		externalBounds = this.sections.getRow(2).getSquare(0).getBounds();
+		newSize = externalBounds.getScaledSize(60, 60);
 		close = new ButtonWithActive(
-				ImageId.WINDOW_ACCEPT_CLOSE_BTN, 
-				ImageId.WINDOW_ACCEPT_CLOSE_A_BTN, 
+				ImageId.WINDOW_PURCHASE_CLOSE_BTN, 
+				ImageId.WINDOW_PURCHASE_CLOSE_A_BTN, 
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
-		
+	
 		// question
-		externalBounds = this.sections.getRow(1).getSquare(1).getBounds();
+		externalBounds = this.sections.getRow(2).getSquare(1).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		question = new ButtonWithActive(
-				ImageId.WINDOW_ACCEPT_FAQ_BTN, 
-				ImageId.WINDOW_ACCEPT_FAQ_ACT_BTN, 
+				ImageId.WINDOW_PURCHASE_FAQ_BTN, 
+				ImageId.WINDOW_PURCHASE_FAQ_ACT_BTN, 
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
-				newSize
+				newSize.getSize()
 			);
-		
+	
 		// accept
-		externalBounds = this.sections.getRow(1).getSquare(2).getBounds();
+		externalBounds = this.sections.getRow(2).getSquare(2).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		accept = new ButtonWithActive(
-				ImageId.WINDOW_ACCEPT_BTN, 
-				ImageId.WINDOW_ACCEPT_ACT_BTN, 
+				ImageId.WINDOW_PURCHASE_OK_BTN, 
+				ImageId.WINDOW_PURCHASE_OK_ACT_BTN, 
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
-				newSize
-			);*/
+				newSize.getSize()
+			);
 	}
 
 }

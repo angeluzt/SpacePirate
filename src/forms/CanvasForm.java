@@ -9,15 +9,14 @@ import java.util.List;
 import javax.swing.JComponent;
 
 import commoninterfaces.Clickable;
-import enums.ImageId;
-import gameobjects.button.ButtonWithActive;
 import gameobjects.gui.Accept;
 import gameobjects.gui.GenericGui;
+import gameobjects.gui.Information;
 import gameobjects.gui.Pause;
 import gameobjects.gui.Purchase;
+import gameobjects.gui.YouWinLose;
 import gameobjects.loadingbar.LoadingBar;
 import gameobjects.sprites.Sprite;
-import gameobjects.window.MainMenuWindow;
 import utils.Constants;
 import utils.ImageManager;
 import utils.ImageUtils;
@@ -34,9 +33,6 @@ public class CanvasForm extends JComponent implements Clickable  {
 	List<Bullet> bullets = new ArrayList<>(); 
 	//Bullet bullet;
 	
-	ButtonWithActive button;
-	ButtonWithActive button1;
-	ButtonWithActive button2;
 	LoadingBar loadingBar = new LoadingBar(new Point(400, 700), new Size(700, 80));
 	GenericGui gui;
 	
@@ -44,17 +40,21 @@ public class CanvasForm extends JComponent implements Clickable  {
 	Sprite spriteUfo;
 	
 	Pause pause;
+	Information information;
 	Accept accept;
 	Purchase purchase;
+	YouWinLose youWin;
 	
 	//MainMenuWindow menu = new MainMenuWindow(new Point(0, 0), new Size(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
 	
 	private static final long serialVersionUID = 1L;
 
 	public CanvasForm() {
-		pause = new Pause(new Point(0, 0), new Size(500, 500), 0.01f, 0.14f, 0.17f);
-		accept = new Accept(new Point(500, 0), new Size(400, 400), 0.01f, 0.14f, 0.17f);
-		purchase = new Purchase(new Point(1000, 0), new Size(500, 500), 0.01f, 0.14f, 0.17f);
+		accept = new Accept(new Point(0, 0), new Size(300, 300));
+		purchase = new Purchase(new Point(300, 0), new Size(300, 300));
+		information = new Information(new Point(600, 0), new Size(300, 300));
+		pause = new Pause(new Point(900, 0), new Size(400, 350));
+		youWin = new YouWinLose(new Point(0, 350), new Size(400, 400));
 		// TODO: Remove when testing is completed
 		for (int i = 1; i <= 10; i++) {
 			ImageManager.addSpriteImage("Missile1_Flying_" + i,
@@ -67,16 +67,6 @@ public class CanvasForm extends JComponent implements Clickable  {
 					"/Images/Ships/Ufo/Ships/Regular/A/Explosion_" + i + ".png", new Size(100, 400));
 		}
 		spriteUfo = new Sprite("Ufo_Regular_A_Explosion_", (short)9, new Point(800, 200), new Size(100, 400));
-		
-		/*for(int i = 0; i < 360; i++) {
-			this.bullets.add(new Bullet(800, 500, i, 5));
-		}*/
-
-		ImageManager.addImage(ImageId.CLOSE_BTN, new Size(200, 200));
-		ImageManager.addImage(ImageId.CLOSE_ACT_BTN, new Size(200, 200));
-		this.button = new ButtonWithActive(ImageId.CLOSE_BTN, ImageId.CLOSE_ACT_BTN, new Point(100, 100), new Size(200, 200));
-		this.button1 = new ButtonWithActive(ImageId.CLOSE_BTN, ImageId.CLOSE_ACT_BTN, new Point(100, 300), new Size(200, 200));
-		this.button2 = new ButtonWithActive(ImageId.CLOSE_BTN, ImageId.CLOSE_ACT_BTN, new Point(100, 500), new Size(200, 200));
 
 		this.setDoubleBuffered(true);
 	}
@@ -91,16 +81,15 @@ public class CanvasForm extends JComponent implements Clickable  {
 			this.bullets.get(i).paintBullet(g);
 		}*/
 		
-		this.button.drawElement(g);
-		this.button1.drawElement(g);
-		this.button2.drawElement(g);
 		this.sprite.drawElement(g);
 		this.spriteUfo.drawElement(g);
 		this.loadingBar.drawElement(g);
-		
-		this.pause.drawElement(g);
+
 		this.accept.drawElement(g);
 		this.purchase.drawElement(g);
+		this.information.drawElement(g);
+		this.pause.drawElement(g);
+		this.youWin.drawElement(g);
 		
 		//this.menu.drawElement(g);
 	}
@@ -123,13 +112,11 @@ public class CanvasForm extends JComponent implements Clickable  {
 
 	@Override
 	public boolean isElementClicked(Point point) {
-		this.button.isElementClicked(point);
-		this.button1.isElementClicked(point);
-		this.button2.isElementClicked(point);
-
-		this.pause.isElementClicked(point);
 		this.accept.isElementClicked(point);
-		purchase.isElementClicked(point);
+		this.purchase.isElementClicked(point);
+		this.information.isElementClicked(point);
+		this.pause.isElementClicked(point);
+		this.youWin.isElementClicked(point);
 
 		return false;
 	}

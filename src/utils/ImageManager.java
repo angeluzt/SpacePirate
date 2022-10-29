@@ -29,6 +29,10 @@ public final class ImageManager {
 	public static Image getImage(ImageId imageId) {
 		return GUI_IMAGES.get(imageId);
 	}
+	
+	public static boolean containsImage(ImageId imageId) {
+		return GUI_IMAGES.containsKey(imageId);
+	}
 
 	// Handle sprite images
 	public static void addSpriteImage(String imageId, String path, Size size) {

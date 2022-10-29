@@ -6,44 +6,27 @@ import java.awt.Point;
 import commoninterfaces.Drawable;
 import enums.ImageId;
 import gameobjects.GenericItem;
+import gameobjects.button.Icon;
 import gameobjects.matrix.WindowSquare;
 import utils.ImageManager;
 import utils.Size;
+import utils.Utils;
 
 public abstract class GenericGui extends GenericItem implements Drawable {
 
 	private ImageId windowId;
-	private ImageId windowTitle;
-	private WindowSquare internalSquare;
+	private Icon windowTitle;
 
-	private Point pointInWindow;
-	private Size sizeInWindow;
 	protected WindowSquare sections;
 
-	public GenericGui(ImageId imageId, Point point, Size size, float xPercent, float yPercent, float downPercent) {
+	public GenericGui(ImageId windowId, Point point, Size size) {
 		super(point, size);
-		this.windowId = imageId;
-		ImageManager.addImage(imageId, size);
 		
-		this.pointInWindow = new Point(
-				(int)(this.getPoint().getX() + (this.getSize().width * xPercent)), 
-				(int)(this.getPoint().getY() + (this.getSize().height * yPercent))
-		);
+		this.windowId = windowId;
 
-		this.sizeInWindow = new Size(
-				(int)(this.getSize().width - (this.getSize().width * xPercent) * 2), 
-				(int)(this.getSize().height - (this.getSize().height * downPercent))
-		);
+		ImageManager.addImage(windowId, size);
 		
-		this.sections = new WindowSquare(this.pointInWindow, this.sizeInWindow);
-	}
-	
-	public Point getPointInWindow() {
-		return this.pointInWindow;
-	}
-	
-	public Size getSizeInWindow() {
-		return sizeInWindow;
+		this.sections = new WindowSquare(point, size);
 	}
 
 	public ImageId getWindowId() {
@@ -52,22 +35,6 @@ public abstract class GenericGui extends GenericItem implements Drawable {
 
 	public void setWindowId(ImageId windowId) {
 		this.windowId = windowId;
-	}
-
-	public WindowSquare getInternalSquare() {
-		return internalSquare;
-	}
-
-	public void setInternalSquare(WindowSquare internalSquare) {
-		this.internalSquare = internalSquare;
-	}
-
-	public void setPointInWindow(Point pointInWindow) {
-		this.pointInWindow = pointInWindow;
-	}
-
-	public void setSizeInWindow(Size sizeInWindow) {
-		this.sizeInWindow = sizeInWindow;
 	}
 	
 	public WindowSquare getSections() {
@@ -78,13 +45,34 @@ public abstract class GenericGui extends GenericItem implements Drawable {
 		this.sections = sections;
 	}
 
+	public Icon getWindowHeader() {
+		return windowTitle;
+	}
+
+	public void setWindowHeader(Icon windowTitle) {
+		this.windowTitle = windowTitle;
+	}
+	
+	/*public void setWindowHeaderIcon(ImageId windowIcon) {
+		//this.setWindowHeaderIcon(ImageId.WINDOW_WINER_HEADER_WIN_TXT);
+		ImageManager.addSmoothImage(windowIcon, windowTitle.getSize());
+		ImageManager.removeImage(windowTitle.getImageId());
+		this.windowTitle.setImageId(windowIcon);
+	}*/
+
 	@Override
 	public void drawElement(Graphics g) {
+		if(!this.isVisible()) {
+			return;
+		}
+		
 		g.drawImage(ImageManager.getImage(this.windowId), 
 				(int)this.getPoint().getX(), 
-				(int)this.getPoint().getY(), 
-				this.getSize().width, 
-				this.getSize().height, null);
+				(int)this.getPoint().getY(), null);
+		
+		this.windowTitle.drawElement(g);
+		
+		Utils.drawGridSystem(g, sections);
 	}
 
 	public abstract void setShell();
