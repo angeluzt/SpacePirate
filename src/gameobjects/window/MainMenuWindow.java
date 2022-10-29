@@ -6,8 +6,6 @@ import java.awt.Point;
 import java.util.Arrays;
 import java.util.List;
 
-import gameobjects.matrix.WindowMatrix;
-import gameobjects.matrix.WindowRow;
 import gameobjects.matrix.WindowSquare;
 import utils.Size;
 import utils.Trigonometry;
@@ -15,30 +13,42 @@ import utils.Utils;
 
 public class MainMenuWindow extends GenericWindow {
 
-	WindowMatrix sections;
+	WindowSquare sections;
 
 	public MainMenuWindow(Point point, Size size) {
 		super(point, size, null);
 		
 		// create a new Square to place te objects, this is a margin
 		Size newSizeForMargin = new Size((int) (size.width * 0.95), (int) (size.height * 0.9));
-		Point newMarginPoint = new Point(Trigonometry.centerSquareInsideanother(point, size, newSizeForMargin));
+		Point newMarginPoint = new Point(Trigonometry.centerSquareInsideanother(this.getBounds(), newSizeForMargin));
 
-		sections = new WindowMatrix();
+		sections = new WindowSquare(newMarginPoint, newSizeForMargin);
 		List<Double> columnsPercent = Arrays.asList(10d, 80d, 10d);
-		//Point p = sections.getRowByIndex(0).getSquares().get(0).getPoint();
-		//Size s = sections.getRowByIndex(0).getSquares().get(0).getSize();
-		sections.addRowWithColumnPercent(100, 3, newMarginPoint, newSizeForMargin, columnsPercent);
-		
+
+		sections.addRowWithColumnPercent(100, 3, columnsPercent);
+		sections.getRow(0).getSquare(0)
+			.addRow(50, 1)
+			.addRow(12.5f, 1)
+			.addRow(12.5f, 1)
+			.addRow(12.5f, 1)
+			.addRow(12.5f, 1);
+		sections.getRow(0).getSquare(1).addRow(60, 1).addRow(40, 1);
+		sections.getRow(0).getSquare(2)
+			.addRow(50, 1)
+			.addRow(12.5f, 1)
+			.addRow(12.5f, 1)
+			.addRow(12.5f, 1)
+			.addRow(12.5f, 1);
+
 	}
 
 	@Override
 	public void drawElement(Graphics g) {
-		g.setColor(Color.PINK);
+		g.setColor(Color.BLACK);
 		g.fillRect(this.getPoint().x, this.getPoint().y, this.getSize().width, this.getSize().height);
 		
 		if(this.sections != null) {
-			g.setColor(Color.BLACK);
+			g.setColor(Color.WHITE);
 			Utils.drawGridSystem(g, sections);
 		}
 	}

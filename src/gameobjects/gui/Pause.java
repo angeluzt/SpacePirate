@@ -7,8 +7,8 @@ import commoninterfaces.Clickable;
 import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
-import gameobjects.matrix.WindowMatrix;
 import gameobjects.matrix.WindowSquare;
+import utils.Bounds;
 import utils.ImageManager;
 import utils.Size;
 import utils.Trigonometry;
@@ -26,103 +26,77 @@ public class Pause extends GenericGui implements Clickable {
 	public Pause(Point point, Size size, float xPercent, float yPercent, float downPercent) {
 		super(ImageId.PAUSE_WINDOW, point, size, xPercent, yPercent, downPercent);
 
-		ImageManager.addImage(ImageId.PAUSE_WINDOW, new Size(400, 600));
-
-		WindowMatrix sections = new WindowMatrix();
-		sections.addRow(100f / 3, 2, this.getPointInWindow(), this.getSizeInWindow());
-		sections.addRow(100f / 3, 1, this.getPointInWindow(), this.getSizeInWindow());
-		sections.addRow(100f / 3, 4, this.getPointInWindow(), this.getSizeInWindow());
-		this.getInternalSquare().addInternalMatrix(sections);
-		
-		WindowSquare currentSquare = this.getInternalSquare().getMatrix().getRowByIndex(2).getSquare(0);
-
-		Size newSize = new Size((int) (currentSquare.getSize().width * 0.8),(int) (currentSquare.getSize().height * 0.7));
-		Point externalPoint = this.getInternalSquare().getMatrix().getRowByIndex(2).getSquare(0).getPoint();
-		Size externalSize = this.getInternalSquare().getMatrix().getRowByIndex(2).getSquare(0).getSize();
-		settings = new ButtonWithActive(
-					ImageId.SETINGS_BTN, 
-					ImageId.SETINGS_ACT_BTN, 
-					Trigonometry.centerSquareInsideanother(externalPoint, externalSize, newSize), 
-					newSize
-				);
-		
-		externalPoint = this.getInternalSquare().getMatrix().getRowByIndex(2).getSquare(1).getPoint();
-		menu = new ButtonWithActive(
-					ImageId.MENU_BTN, 
-					ImageId.MENU_ACT_BTN, 
-					Trigonometry.centerSquareInsideanother(externalPoint, externalSize, newSize), 
-					newSize.getSize()
-				);
-		
-		externalPoint = this.getInternalSquare().getMatrix().getRowByIndex(2).getSquare(2).getPoint();
-		hangar = new ButtonWithActive(
-					ImageId.HANGAR_BTN, 
-					ImageId.HANGAR_ACT_BTN, 
-					Trigonometry.centerSquareInsideanother(externalPoint, externalSize, newSize), 
-					newSize.getSize()
-				);
-		
-		externalPoint = this.getInternalSquare().getMatrix().getRowByIndex(2).getSquare(3).getPoint();
-		accept = new ButtonWithActive(
-					ImageId.ACCEPT_BTN, 
-					ImageId.ACCEPT_ACT_BTN, 
-					Trigonometry.centerSquareInsideanother(externalPoint, externalSize, newSize), 
-					newSize.getSize()
-				);
-
-		currentSquare = this.getInternalSquare().getMatrix().getRowByIndex(1).getSquare(0);
-		newSize = new Size((int) (currentSquare.getSize().width * 0.5),(int) (currentSquare.getSize().height * 0.7));
-		externalPoint = this.getInternalSquare().getMatrix().getRowByIndex(1).getSquare(0).getPoint();
-		externalSize = this.getInternalSquare().getMatrix().getRowByIndex(1).getSquare(0).getSize();
-		pauseTxt = new Icon(
-					ImageId.MAP_TXT,
-					Trigonometry.centerSquareInsideanother(externalPoint, externalSize, newSize), 
-					newSize.getSize()
-				);
-		
-		currentSquare = this.getInternalSquare().getMatrix().getRowByIndex(0).getSquare(0);
-		newSize = new Size((int) (currentSquare.getSize().width * 0.7),(int) (currentSquare.getSize().height * 0.35));
-		externalPoint = this.getInternalSquare().getMatrix().getRowByIndex(0).getSquare(0).getPoint();
-		externalSize = this.getInternalSquare().getMatrix().getRowByIndex(0).getSquare(0).getSize();
-		scoreTxt = new Icon(
-					ImageId.SCORE_TXT,
-					Trigonometry.centerSquareInsideanother(externalPoint, externalSize, newSize), 
-					newSize.getSize()
-				);
-
-		externalPoint = this.getInternalSquare().getMatrix().getRowByIndex(0).getSquare(1).getPoint();
-		externalSize = this.getInternalSquare().getMatrix().getRowByIndex(0).getSquare(1).getSize();
-		pauseTable = new Icon(
-					ImageId.PAUSE_TABLE,
-					Trigonometry.centerSquareInsideanother(externalPoint, externalSize, newSize), 
-					newSize.getSize()
-				);
-		
-		this.setInternalSquare(null);
+		this.setShell();
 	}
 
 	@Override
 	public void drawElement(Graphics g) {
 		super.drawElement(g);
 
-		settings.drawElement(g);
+		/*settings.drawElement(g);
 		menu.drawElement(g);
 		hangar.drawElement(g);
 		accept.drawElement(g);
 		
 		pauseTxt.drawElement(g);
 		scoreTxt.drawElement(g);
-		pauseTable.drawElement(g);
+		pauseTable.drawElement(g);*/
 	}
 
 	@Override
 	public boolean isElementClicked(Point point) {
 
-		settings.isElementClicked(point);
+		/*settings.isElementClicked(point);
 		menu.isElementClicked(point);
 		hangar.isElementClicked(point);
-		accept.isElementClicked(point);
+		accept.isElementClicked(point);*/
 
 		return false;
+	}
+
+	/*private ButtonWithActive settings;
+	private ButtonWithActive menu;
+	private ButtonWithActive hangar;
+	private ButtonWithActive accept;
+	
+	private Icon pauseTxt;
+	private Icon scoreTxt, pauseTable;*/
+	@Override
+	public void setShell() {
+		this.sections = new WindowSquare(this.getPointInWindow(), this.getSizeInWindow());
+		
+		this.sections
+		.addRow(50, 1)
+		.addRow(50, 3);
+		
+		// Close
+		/*Bounds externalBounds = this.sections.getRow(1).getSquare(0).getBounds();
+		Size newSize = externalBounds.getScaledSize(60, 60);
+		close = new ButtonWithActive(
+				ImageId.WINDOW_ACCEPT_CLOSE_BTN, 
+				ImageId.WINDOW_ACCEPT_CLOSE_A_BTN, 
+				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
+				newSize
+			);
+		
+		// question
+		externalBounds = this.sections.getRow(1).getSquare(1).getBounds();
+		newSize = externalBounds.getScaledSize(60, 60);
+		question = new ButtonWithActive(
+				ImageId.WINDOW_ACCEPT_FAQ_BTN, 
+				ImageId.WINDOW_ACCEPT_FAQ_ACT_BTN, 
+				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
+				newSize
+			);
+		
+		// accept
+		externalBounds = this.sections.getRow(1).getSquare(2).getBounds();
+		newSize = externalBounds.getScaledSize(60, 60);
+		accept = new ButtonWithActive(
+				ImageId.WINDOW_ACCEPT_BTN, 
+				ImageId.WINDOW_ACCEPT_ACT_BTN, 
+				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
+				newSize
+			);*/
 	}
 }

@@ -1,10 +1,8 @@
 package utils;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-import gameobjects.matrix.WindowMatrix;
 import gameobjects.matrix.WindowRow;
 import gameobjects.matrix.WindowSquare;
 
@@ -20,15 +18,14 @@ public class Utils {
 		return randomNumber;
 	}
 	
-	public static void drawGridSystem(Graphics g, WindowMatrix matrix) {
-		if(matrix != null && matrix.getMatrix().size() > 0) {
-			g.setColor(Color.GREEN);
-			for (WindowRow row: matrix.getMatrix()) {
+	public static void drawGridSystem(Graphics g, WindowSquare currentSquare) {
+		if(currentSquare != null && currentSquare.getRows().size() > 0) {
+			for (WindowRow row: currentSquare.getRows()) {
 				for (WindowSquare square : row.getSquares()) {
 					g.drawRect((int) square.getPoint().getX(), (int)square.getPoint().getY(), square.getSize().width, square.getSize().height);
 					
-					if(square.getMatrix() != null) {
-						drawGridSystem(g, square.getMatrix());
+					if(square != null && square.getRows().size() > 0) {
+						drawGridSystem(g, square);
 					}
 				}
 			}

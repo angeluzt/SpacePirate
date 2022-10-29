@@ -23,7 +23,7 @@ public class Information extends GenericGui implements Clickable {
 
 		ImageManager.addImage(ImageId.PAUSE_WINDOW, new Size(400, 600));
 
-		WindowMatrix sections = new WindowMatrix();
+		/*WindowMatrix sections = new WindowMatrix();
 		sections.addRow(70f, 1, this.getPointInWindow(), this.getSizeInWindow());
 		sections.addRow(30f, 3, this.getPointInWindow(), this.getSizeInWindow());
 		this.getInternalSquare().addInternalMatrix(sections);
@@ -56,7 +56,7 @@ public class Information extends GenericGui implements Clickable {
 					newSize.getSize()
 				);
 		
-		this.setInternalSquare(null);
+		this.setInternalSquare(null);*/
 	}
 
 	@Override
@@ -76,6 +76,12 @@ public class Information extends GenericGui implements Clickable {
 		accept.isElementClicked(point);
 
 		return false;
+	}
+
+	@Override
+	public void setShell() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

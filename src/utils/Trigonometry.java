@@ -23,33 +23,37 @@ public class Trigonometry {
 		return new Point((int)(point.x + size.width / 2) , (int)(point.y + size.height / 2));
 	}
 	
-	public static Point centerSquareInsideanother(Point externalPoint, Size externalSize, Size internalSquareSize) {
-		Point externalMiddlePoint = Trigonometry.getCentralPointOfSquare(externalPoint, externalSize);
+	public static Point centerSquareInsideanother(Bounds bounds, Size internalSquareSize) {
+		Point externalMiddlePoint = Trigonometry.getCentralPointOfSquare(bounds.getLocation(), bounds.getSize());
 
 		return new Point(externalMiddlePoint.x - internalSquareSize.width / 2, externalMiddlePoint.y - internalSquareSize.height / 2);
 	}
 
-	public static Point topCenterSquareInsideanother(Point externalPoint, Size externalSize, Size internalSquareSize) {
-		Point externalMiddlePoint = Trigonometry.getCentralPointOfSquare(externalPoint, externalSize);
+	public static Point topCenterSquareInsideanother(Bounds bounds, Size internalSquareSize) {
+		Point externalMiddlePoint = Trigonometry.getCentralPointOfSquare(bounds.getLocation(), bounds.getSize());
 
-		return new Point(externalMiddlePoint.x - internalSquareSize.width / 2, externalPoint.y);
+		return new Point(externalMiddlePoint.x - internalSquareSize.width / 2, (int)bounds.getY());
 	}
 	
-	public static Point downCenterSquareInsideanother(Point externalPoint, Size externalSize, Size internalSquareSize) {
-		Point externalMiddlePoint = Trigonometry.getCentralPointOfSquare(externalPoint, externalSize);
+	public static Point downCenterSquareInsideanother(Bounds bounds, Size internalSquareSize) {
+		Point externalMiddlePoint = Trigonometry.getCentralPointOfSquare(bounds.getLocation(), bounds.getSize());
 
-		return new Point(externalMiddlePoint.x - internalSquareSize.width / 2, (externalPoint.y + externalSize.height) - internalSquareSize.height);
+		return new Point(externalMiddlePoint.x - internalSquareSize.width / 2, (int)(bounds.getY() + bounds.getHeight()) - internalSquareSize.height);
 	}
 	
-	public static Point rightCenterSquareInsideanother(Point externalPoint, Size externalSize, Size internalSquareSize) {
-		Point externalMiddlePoint = Trigonometry.getCentralPointOfSquare(externalPoint, externalSize);
+	public static Point rightCenterSquareInsideanother(Bounds bounds, Size internalSquareSize) {
+		Point externalMiddlePoint = Trigonometry.getCentralPointOfSquare(bounds.getLocation(), bounds.getSize());
 
-		return new Point((externalPoint.x + externalSize.getWidth() - internalSquareSize.width), externalMiddlePoint.y - internalSquareSize.height / 2);
+		return new Point((int)(bounds.getX() + bounds.getWidth() - internalSquareSize.width), externalMiddlePoint.y - internalSquareSize.height / 2);
 	}
 
-	public static Point leftCenterSquareInsideanother(Point externalPoint, Size externalSize, Size internalSquareSize) {
-		Point externalMiddlePoint = Trigonometry.getCentralPointOfSquare(externalPoint, externalSize);
+	public static Point leftCenterSquareInsideanother(Bounds bounds, Size internalSquareSize) {
+		Point externalMiddlePoint = Trigonometry.getCentralPointOfSquare(bounds.getLocation(), bounds.getSize());
 
-		return new Point(externalPoint.x, externalMiddlePoint.y - internalSquareSize.height / 2);
+		return new Point((int)bounds.getX(), externalMiddlePoint.y - internalSquareSize.height / 2);
+	}
+	
+	public void scaleSize() {
+		
 	}
 }

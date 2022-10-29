@@ -9,7 +9,7 @@ public enum ImageId {
 	WINDOW_ACCEPT_CLOSE_BTN("/Images/Gui/Buttons/Btns/Close_BTN.png"),
 	WINDOW_ACCEPT_CLOSE_A_BTN("/Images/Gui/Buttons/Btns_Active/Close_BTN.png"),
 	WINDOW_ACCEPT_BTN("/Images/Gui/Buttons/Btns/Ok_BTN.png"),
-	WINDOW_ACCEPT_A_BTN("/Images/Gui/Buttons/Btns_Active/Ok_BTN.png"),
+	WINDOW_ACCEPT_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Ok_BTN.png"),
 	WINDOW_ACCEPT_FAQ_BTN("/Images/Gui/Buttons/Btns/FAQ_BTN.png"),
 	WINDOW_ACCEPT_FAQ_ACT_BTN("/Images/Gui/Buttons/Btns_Active/FAQ_BTN.png"),
 	WINDOW_ACCEPT_TABLE("/Images/Gui/Accept/Table.png"),

@@ -10,13 +10,13 @@ public class WindowRow {
 
 	private ArrayList<WindowSquare> squares = new ArrayList<>();
 	
-	public WindowRow(float windowPercent, int elements, Size windowSize, Point location) {
+	public WindowRow(float windowPercent, float elements, Size windowSize, Point location) {
 		if(elements == 0) {
 			throw new ArithmeticException("[WindowRow][constructor] elements cannot be zero");
 		}
 
-		float itemWidth = (windowSize.width / elements);
-		float itemHeight = (windowPercent * windowSize.height) / 100;
+		double itemWidth = (windowSize.width / elements);
+		double itemHeight = (windowPercent * windowSize.height) / 100;
 
 		for (int i = 0; i < elements; i++) {
 			WindowSquare section = 
@@ -29,7 +29,7 @@ public class WindowRow {
 	}
 
 	// This will create the columns with specific size percent
-	public WindowRow(float windowPercent, int elements, Size windowSize, Point location, List<Double> percent) {
+	public WindowRow(float windowPercent, float elements, Size windowSize, Point location, List<Double> percent) {
 		if(elements == 0) {
 			throw new ArithmeticException("[WindowRow][addColumns] elements cannot be zero");
 		}

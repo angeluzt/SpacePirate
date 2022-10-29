@@ -47,13 +47,13 @@ public class CanvasForm extends JComponent implements Clickable  {
 	Accept accept;
 	Purchase purchase;
 	
-	MainMenuWindow menu = new MainMenuWindow(new Point(0, 0), new Size(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
+	//MainMenuWindow menu = new MainMenuWindow(new Point(0, 0), new Size(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
 	
 	private static final long serialVersionUID = 1L;
 
 	public CanvasForm() {
 		pause = new Pause(new Point(0, 0), new Size(500, 500), 0.01f, 0.14f, 0.17f);
-		accept = new Accept(new Point(500, 0), new Size(500, 500), 0.01f, 0.14f, 0.17f);
+		accept = new Accept(new Point(500, 0), new Size(400, 400), 0.01f, 0.14f, 0.17f);
 		purchase = new Purchase(new Point(1000, 0), new Size(500, 500), 0.01f, 0.14f, 0.17f);
 		// TODO: Remove when testing is completed
 		for (int i = 1; i <= 10; i++) {
@@ -97,11 +97,12 @@ public class CanvasForm extends JComponent implements Clickable  {
 		this.sprite.drawElement(g);
 		this.spriteUfo.drawElement(g);
 		this.loadingBar.drawElement(g);
+		
 		this.pause.drawElement(g);
 		this.accept.drawElement(g);
 		this.purchase.drawElement(g);
 		
-		this.menu.drawElement(g);
+		//this.menu.drawElement(g);
 	}
 
 	public void tick(double dt) {
