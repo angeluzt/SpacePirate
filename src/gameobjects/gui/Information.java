@@ -58,13 +58,13 @@ public class Information extends GenericGui implements Clickable {
 
 		//this.sections = new WindowSquare(this.getPointInWindow(), this.getSizeInWindow());
 		
-		this.sections
+		this.windowBounds
 		.addRow(19, 1)
 		.addRow(40.5f, 2)
 		.addRow(40.5f, 3);
 		
 		// window title: "information"
-		externalBounds = this.sections.getRow(0).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(0).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(50, 60);
 		Icon title = new Icon(
 				ImageId.WINDOW_INFO_HEADER_TXT,
@@ -73,7 +73,7 @@ public class Information extends GenericGui implements Clickable {
 		this.setWindowHeader(title);
 
 		// cristal
-		externalBounds = this.sections.getRow(1).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(1).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(50,50);
 		cristal = new Icon(
 				ImageId.WINDOW_INFO_CRISTAL_ICON,
@@ -82,7 +82,7 @@ public class Information extends GenericGui implements Clickable {
 			);
 
 		// close
-		externalBounds = this.sections.getRow(2).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(2).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		close = new ButtonWithActive(
 				ImageId.WINDOW_INFO_CLOSE_BTN, 
@@ -92,7 +92,7 @@ public class Information extends GenericGui implements Clickable {
 			);
 	
 		// question
-		externalBounds = this.sections.getRow(2).getSquare(1).getBounds();
+		externalBounds = this.windowBounds.getRow(2).getSquare(1).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		question = new ButtonWithActive(
 				ImageId.WINDOW_INFO_FAQ_BTN, 
@@ -102,7 +102,7 @@ public class Information extends GenericGui implements Clickable {
 			);
 	
 		// accept
-		externalBounds = this.sections.getRow(2).getSquare(2).getBounds();
+		externalBounds = this.windowBounds.getRow(2).getSquare(2).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		accept = new ButtonWithActive(
 				ImageId.WINDOW_INFO_OK_BTN, 

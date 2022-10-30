@@ -18,6 +18,14 @@ public class ButtonWithActive extends GenericButton {
 
 		ImageManager.addImage(imageActiveId, size);
 	}
+
+	public ButtonWithActive(ImageId imageId, ImageId imageActiveId, Point location, int size) {
+		super(imageId, location, size);
+		
+		this.imageActiveId = imageActiveId;
+
+		ImageManager.addImage(imageActiveId, this.getSize());
+	}
 	
 	public void drawElement(Graphics g) {
 		if(!this.isAnimationActive) {

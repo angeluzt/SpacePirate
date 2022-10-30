@@ -51,13 +51,13 @@ public class Accept extends GenericGui implements Clickable {
 		Bounds externalBounds;
 		Size newSize;
 		
-		this.sections
+		this.windowBounds
 		.addRow(19, 1)
 		.addRow(40.5f, 1)
 		.addRow(40.5f, 3);
 
 		// window title: "accept"
-		externalBounds = this.sections.getRow(0).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(0).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(50, 60);
 		Icon title = new Icon(
 				ImageId.WINDOW_ACCEPT_HEADER_TXT,
@@ -66,7 +66,7 @@ public class Accept extends GenericGui implements Clickable {
 		this.setWindowHeader(title);
 
 		// Close
-		externalBounds = this.sections.getRow(2).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(2).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		close = new ButtonWithActive(
 				ImageId.WINDOW_ACCEPT_CLOSE_BTN, 
@@ -76,7 +76,7 @@ public class Accept extends GenericGui implements Clickable {
 			);
 		
 		// question
-		externalBounds = this.sections.getRow(2).getSquare(1).getBounds();
+		externalBounds = this.windowBounds.getRow(2).getSquare(1).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		question = new ButtonWithActive(
 				ImageId.WINDOW_ACCEPT_FAQ_BTN, 
@@ -86,7 +86,7 @@ public class Accept extends GenericGui implements Clickable {
 			);
 		
 		// accept
-		externalBounds = this.sections.getRow(2).getSquare(2).getBounds();
+		externalBounds = this.windowBounds.getRow(2).getSquare(2).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		accept = new ButtonWithActive(
 				ImageId.WINDOW_ACCEPT_OK_BTN, 

@@ -17,6 +17,12 @@ public class GenericButton extends Icon implements Drawable, Clickable, Runnable
 		
 		this.imageId = imageId;
 	}
+	
+	public GenericButton(ImageId imageId, Point location, int size) {
+		super(imageId, location, size);
+		
+		this.imageId = imageId;
+	}
 
 	@Override
 	public boolean isElementClicked(Point point) {

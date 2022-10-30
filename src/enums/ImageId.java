@@ -64,9 +64,27 @@ public enum ImageId {
 	WINDOW_WINER_CLOSE_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Close_BTN.png"),
 	WINDOW_WINER_TABLE("/Images/Gui/You_Win/Window.png"),//others
 	WINDOW_WINER_WINDOW("/Images/Gui/You_Win/Window.png"),
-	WINDOW_WINER_START1("/Images/Gui/You_Win/Star_1.png"),
-	WINDOW_WINER_START2("/Images/Gui/You_Win/Star_2.png"),
-	WINDOW_WINER_START3("/Images/Gui/You_Win/Star_3.png"),
+	WINDOW_WINER_START_0_POINTS("/Images/Gui/You_Win/Star_1.png"),
+	WINDOW_WINER_START_HALF_POINTS("/Images/Gui/You_Win/Star_2.png"),
+	WINDOW_WINER_START_1_POINTS("/Images/Gui/You_Win/Star_3.png"),
+	
+	// window menu
+	WINDOW_MENU_HEADER("/Images/Gui/Main_Menu/Header.png"),// TXT
+	WINDOW_MENU_START_BTN("/Images/Gui/Main_Menu/Start_BTN.png"), // BTN
+	WINDOW_MENU_EXIT_BTN("/Images/Gui/Main_Menu/Exit_BTN.png"),
+	WINDOW_MENU_MAP_BTN("/Images/Gui/Main_Menu/Map_BTN.png"),
+	WINDOW_MENU_MOREGAMES_BTN("/Images/Gui/Buttons/Btns/More_Games_BTN.png"),
+	WINDOW_MENU_MOREGAMES_ACT_BTN("/Images/Gui/Buttons/Btns_Active/More_Games_BTN.png"),
+	WINDOW_MENU_RATING_BTN("/Images/Gui/Buttons/Btns/Rating_BTN.png"),
+	WINDOW_MENU_RATING_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Rating_BTN.png"),
+	WINDOW_MENU_INFO_BTN("/Images/Gui/Buttons/Btns/Info_BTN.png"),
+	WINDOW_MENU_INFO_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Info_BTN.png"),
+	WINDOW_MENU_SETTINGS_BTN("/Images/Gui/Buttons/Btns/Settings_BTN.png"),
+	WINDOW_MENU_SETTINGS_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Settings_BTN.png"),
+	WINDOW_MENU_FAQ_BTN("/Images/Gui/Main_Menu/FAQ_BTN.png"),
+	WINDOW_MENU_BG("/Images/Gui/Main_Menu/BG.png"),
+	//WINDOW_MENU_BG("/Images/Gui/Main_Menu/BG.png"),
+	
 
 	// OBJECTS
 	// Loading bars object

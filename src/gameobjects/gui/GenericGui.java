@@ -17,7 +17,7 @@ public abstract class GenericGui extends GenericItem implements Drawable {
 	private ImageId windowId;
 	private Icon windowTitle;
 
-	protected WindowSquare sections;
+	protected WindowSquare windowBounds;
 
 	public GenericGui(ImageId windowId, Point point, Size size) {
 		super(point, size);
@@ -26,7 +26,7 @@ public abstract class GenericGui extends GenericItem implements Drawable {
 
 		ImageManager.addImage(windowId, size);
 		
-		this.sections = new WindowSquare(point, size);
+		this.windowBounds = new WindowSquare(point, size);
 	}
 
 	public ImageId getWindowId() {
@@ -37,12 +37,12 @@ public abstract class GenericGui extends GenericItem implements Drawable {
 		this.windowId = windowId;
 	}
 	
-	public WindowSquare getSections() {
-		return sections;
+	public WindowSquare getWindowBounds() {
+		return windowBounds;
 	}
 
-	public void setSections(WindowSquare sections) {
-		this.sections = sections;
+	public void setWindowBounds(WindowSquare windowBounds) {
+		this.windowBounds = windowBounds;
 	}
 
 	public Icon getWindowHeader() {
@@ -72,7 +72,7 @@ public abstract class GenericGui extends GenericItem implements Drawable {
 		
 		this.windowTitle.drawElement(g);
 		
-		Utils.drawGridSystem(g, sections);
+		Utils.drawGridSystem(g, windowBounds);
 	}
 
 	public abstract void setShell();

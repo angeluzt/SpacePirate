@@ -33,6 +33,10 @@ public final class ImageManager {
 	public static boolean containsImage(ImageId imageId) {
 		return GUI_IMAGES.containsKey(imageId);
 	}
+	
+	public static void replaceImage(ImageId imageId, Image newImage) {
+		GUI_IMAGES.put(imageId, newImage);
+	}
 
 	// Handle sprite images
 	public static void addSpriteImage(String imageId, String path, Size size) {

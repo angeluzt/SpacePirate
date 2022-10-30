@@ -59,13 +59,13 @@ public class Purchase extends GenericGui implements Clickable {
 
 		//this.sections = new WindowSquare(this.getPointInWindow(), this.getSizeInWindow());
 		
-		this.sections
+		this.windowBounds
 		.addRow(19, 1)
 		.addRow(40.5f, 1)
 		.addRow(40.5f, 3);
 		
 		// window title: "purchase"
-		externalBounds = this.sections.getRow(0).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(0).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(50, 60);
 		Icon title = new Icon(
 				ImageId.WINDOW_PURCHASE_HEADER_TXT,
@@ -74,7 +74,7 @@ public class Purchase extends GenericGui implements Clickable {
 		this.setWindowHeader(title);
 		
 		// close
-		externalBounds = this.sections.getRow(2).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(2).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		close = new ButtonWithActive(
 				ImageId.WINDOW_PURCHASE_CLOSE_BTN, 
@@ -84,7 +84,7 @@ public class Purchase extends GenericGui implements Clickable {
 			);
 	
 		// question
-		externalBounds = this.sections.getRow(2).getSquare(1).getBounds();
+		externalBounds = this.windowBounds.getRow(2).getSquare(1).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		question = new ButtonWithActive(
 				ImageId.WINDOW_PURCHASE_FAQ_BTN, 
@@ -94,7 +94,7 @@ public class Purchase extends GenericGui implements Clickable {
 			);
 	
 		// accept
-		externalBounds = this.sections.getRow(2).getSquare(2).getBounds();
+		externalBounds = this.windowBounds.getRow(2).getSquare(2).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		accept = new ButtonWithActive(
 				ImageId.WINDOW_PURCHASE_OK_BTN, 

@@ -12,6 +12,7 @@ import commoninterfaces.Clickable;
 import gameobjects.gui.Accept;
 import gameobjects.gui.GenericGui;
 import gameobjects.gui.Information;
+import gameobjects.gui.MainMenuWindow;
 import gameobjects.gui.Pause;
 import gameobjects.gui.Purchase;
 import gameobjects.gui.YouWinLose;
@@ -45,7 +46,7 @@ public class CanvasForm extends JComponent implements Clickable  {
 	Purchase purchase;
 	YouWinLose youWin;
 	
-	//MainMenuWindow menu = new MainMenuWindow(new Point(0, 0), new Size(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
+	MainMenuWindow menu = new MainMenuWindow(new Point(0, 0), new Size(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
 	
 	private static final long serialVersionUID = 1L;
 
@@ -91,7 +92,7 @@ public class CanvasForm extends JComponent implements Clickable  {
 		this.pause.drawElement(g);
 		this.youWin.drawElement(g);
 		
-		//this.menu.drawElement(g);
+		this.menu.drawElement(g);
 	}
 
 	public void tick(double dt) {
@@ -117,6 +118,8 @@ public class CanvasForm extends JComponent implements Clickable  {
 		this.information.isElementClicked(point);
 		this.pause.isElementClicked(point);
 		this.youWin.isElementClicked(point);
+		
+		this.menu.isElementClicked(point);
 
 		return false;
 	}

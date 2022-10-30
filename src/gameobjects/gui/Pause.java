@@ -62,14 +62,14 @@ public class Pause extends GenericGui implements Clickable {
 		Bounds externalBounds;
 		Size newSize;
 		
-		this.sections
+		this.windowBounds
 		.addRow(14, 1)
 		.addRow(28.5f, 2)
 		.addRow(28.5f, 1)
 		.addRow(28.5f, 4);
 		
 		// window title: "pause"
-		externalBounds = this.sections.getRow(0).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(0).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(50, 60);
 		Icon title = new Icon(
 				ImageId.WINDOW_PAUSE_HEADER_TXT,
@@ -78,7 +78,7 @@ public class Pause extends GenericGui implements Clickable {
 		this.setWindowHeader(title);
 
 		// score text
-		externalBounds = this.sections.getRow(1).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(1).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(40f, 30f);
 		scoreTxt = new Icon(
 				ImageId.WINDOW_PAUSE_SCORE_TXT,
@@ -87,7 +87,7 @@ public class Pause extends GenericGui implements Clickable {
 			);
 
 		// map
-		externalBounds = this.sections.getRow(2).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(2).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(40f, 50f);
 		map = new ButtonWithActive(
 				ImageId.WINDOW_PAUSE_MAP_BTN, 
@@ -97,7 +97,7 @@ public class Pause extends GenericGui implements Clickable {
 			);
 		
 		// close
-		externalBounds = this.sections.getRow(3).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(3).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		settings = new ButtonWithActive(
 				ImageId.WINDOW_PAUSE_SETINGS_BTN, 
@@ -107,7 +107,7 @@ public class Pause extends GenericGui implements Clickable {
 			);
 		
 		// menu
-		externalBounds = this.sections.getRow(3).getSquare(1).getBounds();
+		externalBounds = this.windowBounds.getRow(3).getSquare(1).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		menu = new ButtonWithActive(
 				ImageId.WINDOW_PAUSE_MENU_BTN, 
@@ -117,7 +117,7 @@ public class Pause extends GenericGui implements Clickable {
 			);
 		
 		// hangar
-		externalBounds = this.sections.getRow(3).getSquare(2).getBounds();
+		externalBounds = this.windowBounds.getRow(3).getSquare(2).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		hangar = new ButtonWithActive(
 				ImageId.WINDOW_PAUSE_HANGAR_BTN, 
@@ -127,7 +127,7 @@ public class Pause extends GenericGui implements Clickable {
 			);
 		
 		// accept
-		externalBounds = this.sections.getRow(3).getSquare(3).getBounds();
+		externalBounds = this.windowBounds.getRow(3).getSquare(3).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		accept = new ButtonWithActive(
 				ImageId.WINDOW_PAUSE_PAUSE_BTN, 

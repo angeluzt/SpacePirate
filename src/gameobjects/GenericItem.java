@@ -18,6 +18,10 @@ public abstract class GenericItem {
 	public GenericItem(Point point, Size size) {
 		this.bounds = new Bounds(point, size);
 	}
+	
+	public GenericItem(Point point, int size) {
+		this.bounds = new Bounds(point, new Size(size, size));
+	}
 
 	public Bounds getBounds() {
 		return this.bounds;

@@ -17,7 +17,7 @@ public class YouWinLose extends GenericGui implements Clickable {
 	private ButtonWithActive play;
 	private ButtonWithActive close;
 	
-	private Icon star1, star2, star3;
+	private Icon starCero, star2, star3;
 	private Icon score, record;
 
 	public YouWinLose(Point point, Size size) {
@@ -34,7 +34,7 @@ public class YouWinLose extends GenericGui implements Clickable {
 			return;
 		}
 
-		star1.drawElement(g);
+		starCero.drawElement(g);
 		star2.drawElement(g);
 		star3.drawElement(g);
 		
@@ -60,7 +60,7 @@ public class YouWinLose extends GenericGui implements Clickable {
 		Bounds externalBounds;
 		Size newSize;
 
-		this.sections
+		this.windowBounds
 			.addRow(14, 1)
 			.addRow(29f, 3)
 			.addRow(14f, 2)
@@ -68,35 +68,35 @@ public class YouWinLose extends GenericGui implements Clickable {
 			.addRow(29f, 3);
 		
 		// window title: default "you win"
-		externalBounds = this.sections.getRow(0).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(0).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(50, 60);
 		Icon title = new Icon(Trigonometry.centerSquareInsideanother(externalBounds, newSize), newSize);
 		this.setWindowHeader(title);
 		this.setTitleIfWiner(false);
 		
 		// star 1
-		externalBounds = this.sections.getRow(1).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(1).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(70, 70);
-		star1 = new Icon(
-				ImageId.WINDOW_WINER_START1,
+		starCero = new Icon(
+				ImageId.WINDOW_WINER_START_0_POINTS,
 				Trigonometry.downCenterSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
 		
 		// star 2
-		externalBounds = this.sections.getRow(1).getSquare(1).getBounds();
+		externalBounds = this.windowBounds.getRow(1).getSquare(1).getBounds();
 		newSize = externalBounds.getScaledSize(70, 70);
 		star2 = new Icon(
-				ImageId.WINDOW_WINER_START2,
+				ImageId.WINDOW_WINER_START_HALF_POINTS,
 				Trigonometry.topCenterSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
 		
 		// star 3
-		externalBounds = this.sections.getRow(1).getSquare(2).getBounds();
+		externalBounds = this.windowBounds.getRow(1).getSquare(2).getBounds();
 		newSize = externalBounds.getScaledSize(70, 70);
 		star3 = new Icon(
-				ImageId.WINDOW_WINER_START3,
+				ImageId.WINDOW_WINER_START_1_POINTS,
 				Trigonometry.downCenterSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
@@ -105,7 +105,7 @@ public class YouWinLose extends GenericGui implements Clickable {
 		// TODO: numbers
 		
 		// score
-		externalBounds = this.sections.getRow(2).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(2).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(60, 40);
 		score = new Icon(
 				ImageId.WINDOW_WINER_SCORE_TXT,
@@ -114,7 +114,7 @@ public class YouWinLose extends GenericGui implements Clickable {
 			);
 		
 		// record
-		externalBounds = this.sections.getRow(3).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(3).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(60, 40);
 		record = new Icon(
 				ImageId.WINDOW_WINER_RECORD_TXT,
@@ -124,7 +124,7 @@ public class YouWinLose extends GenericGui implements Clickable {
 		
 		// butons
 		// retry
-		externalBounds = this.sections.getRow(4).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(4).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		retry = new ButtonWithActive(
 				ImageId.WINDOW_WINER_REPLAY_BTN, 
@@ -133,7 +133,7 @@ public class YouWinLose extends GenericGui implements Clickable {
 				newSize
 			);
 		// play
-		externalBounds = this.sections.getRow(4).getSquare(1).getBounds();
+		externalBounds = this.windowBounds.getRow(4).getSquare(1).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		play = new ButtonWithActive(
 				ImageId.WINDOW_WINER_PLAY_BTN, 
@@ -142,7 +142,7 @@ public class YouWinLose extends GenericGui implements Clickable {
 				newSize
 			);
 		// Close
-		externalBounds = this.sections.getRow(4).getSquare(2).getBounds();
+		externalBounds = this.windowBounds.getRow(4).getSquare(2).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		close = new ButtonWithActive(
 				ImageId.WINDOW_WINER_CLOSE_BTN, 
