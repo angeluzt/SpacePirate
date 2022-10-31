@@ -8,13 +8,13 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
-import commoninterfaces.Clickable;
+import commoninterfaces.PropagateClick;
 import gameobjects.gui.Accept;
 import gameobjects.gui.GenericGui;
-import gameobjects.gui.Information;
+import gameobjects.gui.Purchase;
 import gameobjects.gui.MainMenuWindow;
 import gameobjects.gui.Pause;
-import gameobjects.gui.Purchase;
+import gameobjects.gui.Information;
 import gameobjects.gui.YouWinLose;
 import gameobjects.loadingbar.LoadingBar;
 import gameobjects.sprites.Sprite;
@@ -24,7 +24,7 @@ import utils.ImageUtils;
 import utils.Size;
 import weapons.Bullet;
 
-public class CanvasForm extends JComponent implements Clickable  {
+public class CanvasForm extends JComponent implements PropagateClick {
 
 	double vx = 210, vy = 10;
 	double objX = 50, objY = 50;
@@ -41,19 +41,18 @@ public class CanvasForm extends JComponent implements Clickable  {
 	Sprite spriteUfo;
 	
 	Pause pause;
-	Information information;
+	Purchase information;
 	Accept accept;
-	Purchase purchase;
+	Information purchase;
 	YouWinLose youWin;
 	
 	MainMenuWindow menu = new MainMenuWindow(new Point(0, 0), new Size(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
-	
 	private static final long serialVersionUID = 1L;
 
 	public CanvasForm() {
 		accept = new Accept(new Point(0, 0), new Size(300, 300));
-		purchase = new Purchase(new Point(300, 0), new Size(300, 300));
-		information = new Information(new Point(600, 0), new Size(300, 300));
+		purchase = new Information(new Point(300, 0), new Size(300, 300));
+		information = new Purchase(new Point(600, 0), new Size(300, 300));
 		pause = new Pause(new Point(900, 0), new Size(400, 350));
 		youWin = new YouWinLose(new Point(0, 350), new Size(400, 400));
 		// TODO: Remove when testing is completed
@@ -71,6 +70,10 @@ public class CanvasForm extends JComponent implements Clickable  {
 
 		this.setDoubleBuffered(true);
 	}
+	
+	public void repaintGame() {
+		this.repaint();
+	}
 
 	@Override
 	public void paintComponent(Graphics g) {
@@ -82,7 +85,7 @@ public class CanvasForm extends JComponent implements Clickable  {
 			this.bullets.get(i).paintBullet(g);
 		}*/
 		
-		this.sprite.drawElement(g);
+		/*this.sprite.drawElement(g);
 		this.spriteUfo.drawElement(g);
 		this.loadingBar.drawElement(g);
 
@@ -90,7 +93,7 @@ public class CanvasForm extends JComponent implements Clickable  {
 		this.purchase.drawElement(g);
 		this.information.drawElement(g);
 		this.pause.drawElement(g);
-		this.youWin.drawElement(g);
+		this.youWin.drawElement(g);*/
 		
 		this.menu.drawElement(g);
 	}
@@ -102,25 +105,20 @@ public class CanvasForm extends JComponent implements Clickable  {
 			this.bullets.get(i).update(dtStep);
 		}*/
 		
-		this.sprite.moveSprite();
-		this.spriteUfo.moveSprite();
-		this.loadingBar.increment(1);
-	}
-	
-	public void repaintGame() {
-		this.repaint();
-	}
-
-	@Override
-	public boolean isElementClicked(Point point) {
-		this.accept.isElementClicked(point);
-		this.purchase.isElementClicked(point);
-		this.information.isElementClicked(point);
-		this.pause.isElementClicked(point);
-		this.youWin.isElementClicked(point);
+		//this.menu.activateEvent();
 		
-		this.menu.isElementClicked(point);
+		/*this.sprite.moveSprite();
+		this.spriteUfo.moveSprite();
+		this.loadingBar.increment(1);*/
+	}
 
-		return false;
+	public void propagateClick(Point point) {
+		/*this.accept.isElementClicked(point, null);
+		this.purchase.isElementClicked(point, null);
+		this.information.isElementClicked(point, null);
+		this.pause.isElementClicked(point, null);
+		this.youWin.isElementClicked(point, null);*/
+		
+		this.menu.isElementClicked(point, null);
 	}
 }

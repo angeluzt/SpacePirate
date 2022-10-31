@@ -3,52 +3,57 @@ package gameobjects.gui;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import commoninterfaces.Clickable;
 import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
 import utils.Bounds;
+import utils.CommonEvents;
 import utils.Size;
 import utils.Trigonometry;
 
-public class Information extends GenericGui implements Clickable {
+public class Information extends GenericGui {
 
-	private ButtonWithActive close;
-	private ButtonWithActive question;
 	private ButtonWithActive accept;
-	
-	private Icon cristal;
-	
+
 	public Information(Point point, Size size) {
-		super(ImageId.WINDOW_INFO_WINDOW, point, size);
+		super(ImageId.WINDOW_PURCHASE_WINDOW, point, size);
 
 		this.setShell();
 	}
 
 	@Override
 	public void drawElement(Graphics g) {
+		super.drawElement(g);
+		
 		if(!this.isVisible()) {
 			return;
 		}
 
-		super.drawElement(g);
-
-		close.drawElement(g);
-		question.drawElement(g);
 		accept.drawElement(g);
-		cristal.drawElement(g);
 		
-		//this.getWindowHeader().drawElement(g);
 	}
 
 	@Override
-	public boolean isElementClicked(Point point) {
+	public void isElementClicked(Point point, GenericGui currentUi) {
+		if(!this.isFocused()) {
+			return;
+		}
+		
+		// required to set the reference in every window, so we can show the previous window once we close this one
+		this.setReferenceUI(currentUi);
 
-		close.isElementClicked(point);
-		question.isElementClicked(point);
-		accept.isElementClicked(point);
-
-		return false;
+		accept.isElementClicked(point, this);
+	}
+	
+	@Override
+	public void activateEvent(ImageId buttonId) {
+		
+		switch (buttonId) {
+		case WINDOW_INFO_OK_BTN:
+			CommonEvents.closeWindowOpenedOnTop(getReferenceUI(), this);
+			break;
+		}
+		
 	}
 
 	@Override
@@ -60,7 +65,7 @@ public class Information extends GenericGui implements Clickable {
 		
 		this.windowBounds
 		.addRow(19, 1)
-		.addRow(40.5f, 2)
+		.addRow(40.5f, 1)
 		.addRow(40.5f, 3);
 		
 		// window title: "information"
@@ -71,39 +76,10 @@ public class Information extends GenericGui implements Clickable {
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize);
 		this.setWindowHeader(title);
-
-		// cristal
-		externalBounds = this.windowBounds.getRow(1).getSquare(0).getBounds();
-		newSize = externalBounds.getScaledSize(50,50);
-		cristal = new Icon(
-				ImageId.WINDOW_INFO_CRISTAL_ICON,
-				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
-				newSize
-			);
-
-		// close
-		externalBounds = this.windowBounds.getRow(2).getSquare(0).getBounds();
-		newSize = externalBounds.getScaledSize(60, 60);
-		close = new ButtonWithActive(
-				ImageId.WINDOW_INFO_CLOSE_BTN, 
-				ImageId.WINDOW_INFO_CLOSE_ACT_BTN, 
-				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
-				newSize
-			);
-	
-		// question
-		externalBounds = this.windowBounds.getRow(2).getSquare(1).getBounds();
-		newSize = externalBounds.getScaledSize(60, 60);
-		question = new ButtonWithActive(
-				ImageId.WINDOW_INFO_FAQ_BTN, 
-				ImageId.WINDOW_INFO_FAQ_ACT_BTN, 
-				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
-				newSize.getSize()
-			);
 	
 		// accept
-		externalBounds = this.windowBounds.getRow(2).getSquare(2).getBounds();
-		newSize = externalBounds.getScaledSize(60, 60);
+		externalBounds = this.windowBounds.getRow(2).getSquare(1).getBounds();
+		newSize = externalBounds.getScaledSizeSameHeight(50);
 		accept = new ButtonWithActive(
 				ImageId.WINDOW_INFO_OK_BTN, 
 				ImageId.WINDOW_INFO_OK_ACT_BTN, 

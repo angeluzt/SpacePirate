@@ -3,7 +3,6 @@ package gameobjects.gui;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import commoninterfaces.Clickable;
 import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
@@ -11,7 +10,7 @@ import utils.Bounds;
 import utils.Size;
 import utils.Trigonometry;
 
-public class YouWinLose extends GenericGui implements Clickable {
+public class YouWinLose extends GenericGui {
 
 	private ButtonWithActive retry;
 	private ButtonWithActive play;
@@ -47,12 +46,14 @@ public class YouWinLose extends GenericGui implements Clickable {
 	}
 
 	@Override
-	public boolean isElementClicked(Point point) {
-		retry.isElementClicked(point);
-		play.isElementClicked(point);
-		close.isElementClicked(point);
+	public void isElementClicked(Point point, GenericGui currentUi) {
+		if(!this.isFocused()) {
+			return;
+		}
 
-		return false;
+		retry.isElementClicked(point, this);
+		play.isElementClicked(point, this);
+		close.isElementClicked(point, this);
 	}
 
 	@Override
@@ -163,6 +164,12 @@ public class YouWinLose extends GenericGui implements Clickable {
 		} else {
 			this.getWindowHeader().setImageId(ImageId.WINDOW_WINER_HEADER_LOSE_TXT);
 		}
+	}
+
+	@Override
+	public void activateEvent(ImageId buttonId) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

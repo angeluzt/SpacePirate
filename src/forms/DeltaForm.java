@@ -97,7 +97,7 @@ public class DeltaForm extends JFrame implements Runnable, MouseListener {
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		this.gameManager.isElementClicked(e.getPoint());
+		this.gameManager.propagateClick(e.getPoint());
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {

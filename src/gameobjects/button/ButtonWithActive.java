@@ -28,6 +28,10 @@ public class ButtonWithActive extends GenericButton {
 	}
 	
 	public void drawElement(Graphics g) {
+		if(!this.isVisible()) {
+			return;
+		}
+
 		if(!this.isAnimationActive) {
 			g.drawImage(ImageManager.getImage(this.imageId), 
 					(int)this.getPoint().getX(), 
@@ -46,5 +50,4 @@ public class ButtonWithActive extends GenericButton {
 	public ImageId getImageId() {
 		return imageActiveId;
 	}
-
 }

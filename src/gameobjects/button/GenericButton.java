@@ -5,18 +5,19 @@ import java.awt.Point;
 import commoninterfaces.Clickable;
 import commoninterfaces.Drawable;
 import enums.ImageId;
+import gameobjects.gui.GenericGui;
 import utils.Size;
 import utils.Trigonometry;
 
 public class GenericButton extends Icon implements Drawable, Clickable, Runnable {
 
 	protected boolean isAnimationActive = false;
+	private GenericGui referenceUI;
 
 	public GenericButton(ImageId imageId, Point location, Size size) {
 		super(imageId, location, size);
 		
-		this.imageId = imageId;
-	}
+		this.imageId = imageId;	}
 	
 	public GenericButton(ImageId imageId, Point location, int size) {
 		super(imageId, location, size);
@@ -25,19 +26,18 @@ public class GenericButton extends Icon implements Drawable, Clickable, Runnable
 	}
 
 	@Override
-	public boolean isElementClicked(Point point) {
+	public void isElementClicked(Point point, GenericGui currentUi) {
 		if(isAnimationActive) {
-			return false;
+			return;
 		}
 
 		boolean isClicket = Trigonometry.isPointInsideRegion(point, this);
 		
 		if(isClicket) {
+			this.referenceUI = currentUi;
 			this.isAnimationActive = true;
 			new Thread(this).start();
 		}
-
-		return isClicket;
 	}
 
 	@Override
@@ -61,7 +61,12 @@ public class GenericButton extends Icon implements Drawable, Clickable, Runnable
 
 		this.setPoint(tempLocation);
 		this.setSize(tempSize);
-
+		
+		// reset animation
 		this.isAnimationActive = false;
+		
+		// Trigger event for specific UI
+		this.referenceUI.activateEvent(imageId);
+		this.referenceUI = null;
 	}
 }

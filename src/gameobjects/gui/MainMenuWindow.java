@@ -5,36 +5,63 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Arrays;
 
-import commoninterfaces.Clickable;
 import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
-import gameobjects.matrix.WindowSquare;
 import utils.Bounds;
+import utils.CommonEvents;
 import utils.Size;
 import utils.Trigonometry;
 import utils.Utils;
 
-public class MainMenuWindow extends GenericGui implements Clickable, Runnable {
+public class MainMenuWindow extends GenericGui implements Runnable {
 
 	private Icon menuHeader, background;
 	private ButtonWithActive start, map, exit;
 	private ButtonWithActive info, settings, score;
 	private ButtonWithActive moreGames, record, FAQ;
+	
+	private Settings settingsWindow;
+	private Purchase purchase;
+	private Information informationWindow; 
 
 	public MainMenuWindow(Point point, Size size) {
 		super(ImageId.WINDOW_MENU_BG, point, size);
 		
+		// The first window most be focused
+		this.setFocused(true);
 		this.setShell();
+		
+		Size newSize = this.getBounds().getScaledSize(25, 45);
+		settingsWindow = new Settings(
+				Trigonometry.centerSquareInsideanother(this.getBounds(), newSize),  
+				newSize
+		);
+
+		informationWindow = new Information(
+				Trigonometry.centerSquareInsideanother(this.getBounds(), newSize),  
+				newSize
+		);
+		
+		purchase = new Purchase(
+				Trigonometry.centerSquareInsideanother(this.getBounds(), newSize),  
+				newSize
+		);
+
+
+		this.setVisible(true);
 		new Thread(this).start();
 	}
 
 	@Override
 	public void drawElement(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(this.getPoint().x, this.getPoint().y, this.getSize().width, this.getSize().height);
+		//g.setColor(Color.BLACK);
+		//g.fillRect(this.getPoint().x, this.getPoint().y, this.getSize().width, this.getSize().height);
 		
 		background.drawElement(g);
+		
+		//Utils.drawGridSystem(g, windowBounds);
+		
 		info.drawElement(g);
 		settings.drawElement(g);
 		
@@ -43,21 +70,57 @@ public class MainMenuWindow extends GenericGui implements Clickable, Runnable {
 		map.drawElement(g);
 		exit.drawElement(g);
 
-		g.setColor(Color.WHITE);
-		Utils.drawGridSystem(g, windowBounds);
+		// Internal windows
+		settingsWindow.drawElement(g);
+		informationWindow.drawElement(g);
+		purchase.drawElement(g);
+
 	}
 
 	@Override
-	public boolean isElementClicked(Point point) {
+	public void isElementClicked(Point point, GenericGui currentUi) {
+		// detect clicks in internal windows
+		settingsWindow.isElementClicked(point, this);
+		informationWindow.isElementClicked(point, this);
+		purchase.isElementClicked(point, this);
+	
+		// do not detect clciks if not focused 
+		if(!this.isFocused()) {
+			return;
+		}
 
-		info.isElementClicked(point);
-		settings.isElementClicked(point);
+		info.isElementClicked(point, this);
+		settings.isElementClicked(point, this);
+		start.isElementClicked(point, this);
+		map.isElementClicked(point, this);
+		exit.isElementClicked(point, this);
+	}
+	
+	@Override
+	public void activateEvent(ImageId buttonId) {
+		switch (buttonId) {
+			case WINDOW_MENU_INFO_BTN: 
+				CommonEvents.openWindowOnTop(this, informationWindow);
+				//CommonEvents.openWindowOnTop(this, purchase);
+				break;
+			case WINDOW_MENU_SETTINGS_BTN: 
+				CommonEvents.openWindowOnTop(this, settingsWindow);
+				/*this.setFocused(false);
+				this.settingsWindow.setVisible(true);
+				this.settingsWindow.setFocused(true);*/
 
-		start.isElementClicked(point);
-		map.isElementClicked(point);
-		exit.isElementClicked(point);
+				break;
+			case WINDOW_MENU_START_BTN: 
+				
+				break;
+			case WINDOW_MENU_MAP_BTN: 
+				
+				break;
 
-		return false;
+			case WINDOW_MENU_EXIT_BTN: 
+				CommonEvents.closeGame();
+				break;
+		}
 	}
 
 	@Override
@@ -82,7 +145,7 @@ public class MainMenuWindow extends GenericGui implements Clickable, Runnable {
 			.addRow(12.5f, 1)
 			.addRow(12.5f, 1)
 			.addRow(12.5f, 1); 
-		windowBounds.getRow(0).getSquare(2) // settings column
+		windowBounds.getRow(0).getSquare(2)// settings column
 			.addRow(50, 1)
 			.addRow(12.5f, 1)
 			.addRow(12.5f, 1)
@@ -100,7 +163,7 @@ public class MainMenuWindow extends GenericGui implements Clickable, Runnable {
 
 		// Info button
 		externalBounds = this.windowBounds.getRow(0).getSquare(0).getRow(0).getSquare(0).getBounds();
-		newSize = externalBounds.getScaledSize(50, 60);
+		newSize = externalBounds.getScaledSizeSameWidth(50);
 		info = new ButtonWithActive(
 				ImageId.WINDOW_MENU_INFO_BTN,
 				ImageId.WINDOW_MENU_INFO_ACT_BTN,
@@ -109,7 +172,7 @@ public class MainMenuWindow extends GenericGui implements Clickable, Runnable {
 		
 		// settings button
 		externalBounds = this.windowBounds.getRow(0).getSquare(2).getBounds();
-		newSize = externalBounds.getScaledSize(50, 60);
+		//newSize = externalBounds.getScaledSize(50, 60);
 		settings = new ButtonWithActive(
 				ImageId.WINDOW_MENU_SETTINGS_BTN,
 				ImageId.WINDOW_MENU_SETTINGS_ACT_BTN,
@@ -118,13 +181,13 @@ public class MainMenuWindow extends GenericGui implements Clickable, Runnable {
 		
 		// header icon
 		externalBounds = this.windowBounds.getRow(0).getSquare(1).getRow(0).getSquare(0).getBounds();
-		newSize = externalBounds.getScaledSize(1, 1);
+		newSize = externalBounds.getScaledSize(1, 1); // 1, 1 so we can perform an animation in the thread
 		menuHeader = new Icon(
-				ImageId.WINDOW_MENU_HEADER,
+				ImageId.WINDOW_MENU_HEADER_TXT,
 				Trigonometry.downCenterSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
-		
+
 		// start icon
 		externalBounds = this.windowBounds.getRow(0).getSquare(1).getRow(1).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(15, 60);
@@ -134,25 +197,26 @@ public class MainMenuWindow extends GenericGui implements Clickable, Runnable {
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
-		// MAP icon
+		// MAP button
 		externalBounds = this.windowBounds.getRow(0).getSquare(1).getRow(2).getSquare(0).getBounds();
-		newSize = externalBounds.getScaledSize(15, 60);
+		//newSize = externalBounds.getScaledSize(15, 60);
 		map = new ButtonWithActive(
 				ImageId.WINDOW_MENU_MAP_BTN,
 				ImageId.WINDOW_MENU_MAP_BTN,
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
-		// EXIT icon
+
+		// EXIT button
 		externalBounds = this.windowBounds.getRow(0).getSquare(1).getRow(3).getSquare(0).getBounds();
-		newSize = externalBounds.getScaledSize(15, 60);
+		//newSize = externalBounds.getScaledSize(15, 60);
 		exit = new ButtonWithActive(
 				ImageId.WINDOW_MENU_EXIT_BTN,
 				ImageId.WINDOW_MENU_EXIT_BTN,
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
-		
+
 		
 	}
 
@@ -177,5 +241,4 @@ public class MainMenuWindow extends GenericGui implements Clickable, Runnable {
 		}
 		
 	}
-
 }

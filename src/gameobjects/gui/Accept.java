@@ -3,7 +3,6 @@ package gameobjects.gui;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import commoninterfaces.Clickable;
 import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
@@ -11,7 +10,7 @@ import utils.Bounds;
 import utils.Size;
 import utils.Trigonometry;
 
-public class Accept extends GenericGui implements Clickable {
+public class Accept extends GenericGui {
 
 	private ButtonWithActive close;
 	private ButtonWithActive question;
@@ -37,13 +36,18 @@ public class Accept extends GenericGui implements Clickable {
 	}
 
 	@Override
-	public boolean isElementClicked(Point point) {
+	public void isElementClicked(Point point, GenericGui currentUi) {
+		if(!this.isFocused()) {
+			return;
+		}
 
-		close.isElementClicked(point);
-		question.isElementClicked(point);
-		accept.isElementClicked(point);
-
-		return false;
+		close.isElementClicked(point, this);
+		question.isElementClicked(point, this);
+		accept.isElementClicked(point, this);
+		
+		if(this.isExecuteEvents()) {
+			
+		}
 	}
 
 	@Override
@@ -70,17 +74,17 @@ public class Accept extends GenericGui implements Clickable {
 		newSize = externalBounds.getScaledSize(60, 60);
 		close = new ButtonWithActive(
 				ImageId.WINDOW_ACCEPT_CLOSE_BTN, 
-				ImageId.WINDOW_ACCEPT_CLOSE_ACT_BTN, 
+				ImageId.WINDOW_ACCEPT_CLOSE_ACT_BTN,
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
-		
+
 		// question
 		externalBounds = this.windowBounds.getRow(2).getSquare(1).getBounds();
 		newSize = externalBounds.getScaledSize(60, 60);
 		question = new ButtonWithActive(
 				ImageId.WINDOW_ACCEPT_FAQ_BTN, 
-				ImageId.WINDOW_ACCEPT_FAQ_ACT_BTN, 
+				ImageId.WINDOW_ACCEPT_FAQ_ACT_BTN,
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
@@ -90,10 +94,14 @@ public class Accept extends GenericGui implements Clickable {
 		newSize = externalBounds.getScaledSize(60, 60);
 		accept = new ButtonWithActive(
 				ImageId.WINDOW_ACCEPT_OK_BTN, 
-				ImageId.WINDOW_ACCEPT_OK_ACT_BTN, 
+				ImageId.WINDOW_ACCEPT_OK_ACT_BTN,
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
 	}
 
+	@Override
+	public void activateEvent(ImageId buttonId) {
+
+	}
 }

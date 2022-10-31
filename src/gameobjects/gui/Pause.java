@@ -3,7 +3,6 @@ package gameobjects.gui;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import commoninterfaces.Clickable;
 import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
@@ -11,7 +10,7 @@ import utils.Bounds;
 import utils.Size;
 import utils.Trigonometry;
 
-public class Pause extends GenericGui implements Clickable {
+public class Pause extends GenericGui {
 
 	private ButtonWithActive settings;
 	private ButtonWithActive menu;
@@ -46,15 +45,16 @@ public class Pause extends GenericGui implements Clickable {
 	}
 
 	@Override
-	public boolean isElementClicked(Point point) {
-
-		settings.isElementClicked(point);
-		menu.isElementClicked(point);
-		hangar.isElementClicked(point);
-		accept.isElementClicked(point);
-		map.isElementClicked(point);
-
-		return false;
+	public void isElementClicked(Point point, GenericGui currentUi) {
+		if(!this.isFocused()) {
+			return;
+		}
+	
+		settings.isElementClicked(point, this);
+		menu.isElementClicked(point, this);
+		hangar.isElementClicked(point, this);
+		accept.isElementClicked(point, this);
+		map.isElementClicked(point, this);
 	}
 
 	@Override
@@ -135,5 +135,11 @@ public class Pause extends GenericGui implements Clickable {
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
+	}
+
+	@Override
+	public void activateEvent(ImageId buttonId) {
+		// TODO Auto-generated method stub
+		
 	}
 }

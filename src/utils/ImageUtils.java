@@ -31,6 +31,7 @@ public final class ImageUtils {
 			return outputImage;
 		} catch (Exception e) {
 			System.out.println("ERROR While reading regular image: " + path);
+			System.out.println(e);
 			return null;
 		}
 	}
@@ -44,6 +45,7 @@ public final class ImageUtils {
 			return outputImage;
 		} catch (Exception e) {
 			System.out.println("ERROR While reading smooth image: " + path);
+			System.out.println(e);
 			return null;
 		}
 	}

@@ -3,8 +3,10 @@ package gameobjects.gui;
 import java.awt.Graphics;
 import java.awt.Point;
 
+import commoninterfaces.Clickable;
 import commoninterfaces.Drawable;
 import enums.ImageId;
+import enums.TriggerEvent;
 import gameobjects.GenericItem;
 import gameobjects.button.Icon;
 import gameobjects.matrix.WindowSquare;
@@ -12,21 +14,29 @@ import utils.ImageManager;
 import utils.Size;
 import utils.Utils;
 
-public abstract class GenericGui extends GenericItem implements Drawable {
+public abstract class GenericGui extends GenericItem implements Drawable, TriggerEvent, Clickable {
 
 	private ImageId windowId;
 	private Icon windowTitle;
+	private boolean focused;
+	private boolean executeEvents;
 
 	protected WindowSquare windowBounds;
+	private GenericGui referenceUI;
 
 	public GenericGui(ImageId windowId, Point point, Size size) {
 		super(point, size);
 		
 		this.windowId = windowId;
+		this.focused = false;
+		this.executeEvents = false;
 
 		ImageManager.addImage(windowId, size);
 		
 		this.windowBounds = new WindowSquare(point, size);
+		
+		// the default behavior is when not visible
+		this.setVisible(false);
 	}
 
 	public ImageId getWindowId() {
@@ -52,13 +62,30 @@ public abstract class GenericGui extends GenericItem implements Drawable {
 	public void setWindowHeader(Icon windowTitle) {
 		this.windowTitle = windowTitle;
 	}
-	
-	/*public void setWindowHeaderIcon(ImageId windowIcon) {
-		//this.setWindowHeaderIcon(ImageId.WINDOW_WINER_HEADER_WIN_TXT);
-		ImageManager.addSmoothImage(windowIcon, windowTitle.getSize());
-		ImageManager.removeImage(windowTitle.getImageId());
-		this.windowTitle.setImageId(windowIcon);
-	}*/
+
+	public boolean isFocused() {
+		return focused;
+	}
+
+	public void setFocused(boolean focused) {
+		this.focused = focused;
+	}
+
+	public boolean isExecuteEvents() {
+		return executeEvents;
+	}
+
+	public void setExecuteEvents(boolean executeEvents) {
+		this.executeEvents = executeEvents;
+	}
+
+	public GenericGui getReferenceUI() {
+		return referenceUI;
+	}
+
+	public void setReferenceUI(GenericGui referenceUI) {
+		this.referenceUI = referenceUI;
+	}
 
 	@Override
 	public void drawElement(Graphics g) {
@@ -70,7 +97,9 @@ public abstract class GenericGui extends GenericItem implements Drawable {
 				(int)this.getPoint().getX(), 
 				(int)this.getPoint().getY(), null);
 		
-		this.windowTitle.drawElement(g);
+		if(this.windowTitle != null) {
+			this.windowTitle.drawElement(g);
+		}
 		
 		Utils.drawGridSystem(g, windowBounds);
 	}

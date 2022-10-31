@@ -69,7 +69,7 @@ public enum ImageId {
 	WINDOW_WINER_START_1_POINTS("/Images/Gui/You_Win/Star_3.png"),
 	
 	// window menu
-	WINDOW_MENU_HEADER("/Images/Gui/Main_Menu/Header.png"),// TXT
+	WINDOW_MENU_HEADER_TXT("/Images/Gui/Main_Menu/Header.png"),// TXT
 	WINDOW_MENU_START_BTN("/Images/Gui/Main_Menu/Start_BTN.png"), // BTN
 	WINDOW_MENU_EXIT_BTN("/Images/Gui/Main_Menu/Exit_BTN.png"),
 	WINDOW_MENU_MAP_BTN("/Images/Gui/Main_Menu/Map_BTN.png"),
@@ -83,7 +83,27 @@ public enum ImageId {
 	WINDOW_MENU_SETTINGS_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Settings_BTN.png"),
 	WINDOW_MENU_FAQ_BTN("/Images/Gui/Main_Menu/FAQ_BTN.png"),
 	WINDOW_MENU_BG("/Images/Gui/Main_Menu/BG.png"),
-	//WINDOW_MENU_BG("/Images/Gui/Main_Menu/BG.png"),
+	
+	// settings
+	// window menu
+	WINDOW_SETTINGS_HEADER_TXT("/Images/Gui/Setting/Header.png"),// TXT
+	WINDOW_SETTINGS_MUSIC_TXT("/Images/Gui/Setting/Music.png"),
+	WINDOW_SETTINGS_SOUND_TXT("/Images/Gui/Setting/Sound.png"),
+	WINDOW_SETTINGS_NOTIFICATION_TXT("/Images/Gui/Setting/Notification.png"),
+	WINDOW_SETTINGS_HEADER("/Images/Gui/Setting/Header.png"),
+	WINDOW_SETTINGS_CLOSE_BTN("/Images/Gui/Buttons/Btns/Close_BTN.png"),
+	WINDOW_SETTINGS_CLOSE_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Close_BTN.png"),
+	WINDOW_SETTINGS_MENU_BTN("/Images/Gui/Buttons/Btns/Menu_BTN.png"),
+	WINDOW_SETTINGS_MENU_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Menu_BTN.png"),
+	WINDOW_SETTINGS_MUSIC_BTN("/Images/Gui/Buttons/Btns/Music_BTN.png"),
+	WINDOW_SETTINGS_MUSIC_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Music_BTN.png"),
+	WINDOW_SETTINGS_NOTIFICATIONS_BTN("/Images/Gui/Buttons/Btns/Notifications_BTN.png"),
+	WINDOW_SETTINGS_NOTIFICATIONS_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Notifications_BTN.png"),
+	WINDOW_SETTINGS_OK_BTN("/Images/Gui/Buttons/Btns/Ok_BTN.png"),
+	WINDOW_SETTINGS_OK_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Ok_BTN.png"),
+	WINDOW_SETTINGS_SOUND_BTN("/Images/Gui/Buttons/Btns/Sound_BTN.png"),
+	WINDOW_SETTINGS_SOUND_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Sound_BTN.png"),
+	WINDOW_SETTINGS_WINDOW("/Images/Gui/Setting/Window_1.png"),
 	
 
 	// OBJECTS

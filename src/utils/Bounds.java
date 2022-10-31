@@ -16,6 +16,17 @@ public class Bounds {
 		return new Size((int)(widthPercent * size.width) / 100, (int)(heightPercent * size.height) / 100);
 	}
 	
+	public Size getScaledSizeSameWidth(float widthPercent) {
+		int responseWidth = (int)(widthPercent * size.width) / 100;
+		return new Size(responseWidth, responseWidth);
+	}
+	
+	public Size getScaledSizeSameHeight(float heightPercent) {
+		int responseHeight = (int)(heightPercent * size.height) / 100;
+		
+		return new Size(responseHeight, responseHeight);
+	}
+	
 	public Point getLocation() {
 		return location;
 	}
