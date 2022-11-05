@@ -8,6 +8,7 @@ import java.util.List;
 import commoninterfaces.DragDrop;
 import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
+import gameobjects.button.EnabledButton;
 import gameobjects.button.Icon;
 import gameobjects.dragbar.DragBar;
 import utils.Bounds;
@@ -18,9 +19,9 @@ import utils.Trigonometry;
 
 public class Settings extends GenericGui implements DragDrop {
 
-	private ButtonWithActive sound;
-	private ButtonWithActive music;
-	private ButtonWithActive notifications;
+	private EnabledButton sound;
+	private EnabledButton music;
+	private EnabledButton notifications;
 	private ButtonWithActive moreSettings;
 	private ButtonWithActive ok;
 	private ButtonWithActive menu;
@@ -83,21 +84,31 @@ public class Settings extends GenericGui implements DragDrop {
 	}
 	
 	public float getMusicSound() {
-		return this.musicVolume.getActualValue();
+		if(music.isButtonActive()) {
+			return this.musicVolume.getActualValue();
+		} else {
+			return 0;
+		}
+		
 	}
 	
 	public float getEffectsSound() {
-		return this.effectsVolume.getActualValue();
+		if(sound.isButtonActive()) {
+			return this.effectsVolume.getActualValue();
+		} else {
+			return 0;
+		}
+		
 	}
 	
 	@Override
 	public void activateEvent(ImageId buttonId) {
 		switch (buttonId) {
 			case WINDOW_SETTINGS_SOUND_BTN: 
-				
+				this.getReferenceUI().activateEvent(sound.getImageId());
 				break;
 			case WINDOW_SETTINGS_MUSIC_BTN: 
-				
+				this.getReferenceUI().activateEvent(music.getImageId());
 				break;
 			case WINDOW_SETTINGS_NOTIFICATIONS_BTN: 
 				
@@ -139,9 +150,8 @@ public class Settings extends GenericGui implements DragDrop {
 		// sound
 		externalBounds = this.windowBounds.getRow(1).getSquare(0).getBounds();
 		buttonSize = externalBounds.getScaledSizeSameWidth(70);
-		sound = new ButtonWithActive(
-				ImageId.WINDOW_SETTINGS_SOUND_BTN, 
-				ImageId.WINDOW_SETTINGS_SOUND_ACT_BTN, 
+		sound = new EnabledButton(
+				ImageId.WINDOW_SETTINGS_SOUND_BTN,
 				Trigonometry.centerSquareInsideanother(externalBounds, buttonSize), 
 				buttonSize
 			);
@@ -154,9 +164,8 @@ public class Settings extends GenericGui implements DragDrop {
 		
 		// music
 		externalBounds = this.windowBounds.getRow(2).getSquare(0).getBounds();
-		music = new ButtonWithActive(
+		music = new EnabledButton(
 				ImageId.WINDOW_SETTINGS_MUSIC_BTN, 
-				ImageId.WINDOW_SETTINGS_MUSIC_ACT_BTN, 
 				Trigonometry.centerSquareInsideanother(externalBounds, buttonSize), 
 				buttonSize
 			);
@@ -169,12 +178,12 @@ public class Settings extends GenericGui implements DragDrop {
 
 		// notifications
 		externalBounds = this.windowBounds.getRow(3).getSquare(0).getBounds();
-		notifications = new ButtonWithActive(
+		notifications = new EnabledButton(
 				ImageId.WINDOW_SETTINGS_NOTIFICATIONS_BTN, 
-				ImageId.WINDOW_SETTINGS_NOTIFICATIONS_ACT_BTN, 
 				Trigonometry.centerSquareInsideanother(externalBounds, buttonSize), 
 				buttonSize
 			);
+
 		// show more settings
 		externalBounds = this.windowBounds.getRow(4).getSquare(0).getBounds();
 		moreSettings = new ButtonWithActive(

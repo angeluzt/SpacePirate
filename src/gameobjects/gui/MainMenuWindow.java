@@ -30,7 +30,9 @@ public class MainMenuWindow extends GenericGui implements DragDrop {
 	private Information informationWindow; 
 	private LevelSelector levelSelector;
 	
-	Sound backgroundSound;
+	private Sound backgroundSound;
+	
+	private final String infoTxt = "Wellcome to Space GUI, ";
 
 	public MainMenuWindow(Point point, Size size) {
 		super(ImageId.WINDOW_MENU_BG, point, size);
@@ -131,11 +133,11 @@ public class MainMenuWindow extends GenericGui implements DragDrop {
 				CommonEvents.closeGame();
 
 				break;
-			case WINDOW_SETTINGS_DRAG_BAR_MUSIC_SOUND: 
+			case WINDOW_SETTINGS_DRAG_BAR_MUSIC_SOUND, WINDOW_SETTINGS_MUSIC_BTN: 
 				this.adjustMusicVolume(this.settingsWindow.getMusicSound());
 
 				break;
-			case WINDOW_SETTINGS_DRAG_BAR_EFECTS_SOUND: 
+			case WINDOW_SETTINGS_DRAG_BAR_EFECTS_SOUND, WINDOW_SETTINGS_SOUND_BTN: 
 				this.adjustEffectsVolume(this.settingsWindow.getEffectsSound());
 				new Sound().setFile(Sounds.BUTTON_CLICK, Constants.SOUND_EFFECTS_LEVEL).play();
 				break;

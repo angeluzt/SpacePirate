@@ -24,7 +24,7 @@ public class DragBar extends Icon implements DragDrop {
 
 		this.currentWidth = size.getWidth();
 		this.currentHeight = size.getHeight();
-		this.actualValue = 100;
+		this.actualValue = (float)currentWidth / (float)this.getSize().width;
 	}
 	
 	@Override
