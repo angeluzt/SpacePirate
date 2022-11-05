@@ -7,6 +7,7 @@ import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
 import utils.Bounds;
+import utils.ImageManager;
 import utils.Size;
 import utils.Trigonometry;
 
@@ -19,7 +20,8 @@ public class Accept extends GenericGui {
 	public Accept(Point point, Size size) {
 		super(ImageId.WINDOW_ACCEPT_WINDOW, point, size);
 
-		this.setShell();
+		//this.setShell();
+		this.pageLoaded = true;
 	}
 
 	@Override
@@ -44,10 +46,6 @@ public class Accept extends GenericGui {
 		close.isElementClicked(point, this);
 		question.isElementClicked(point, this);
 		accept.isElementClicked(point, this);
-		
-		if(this.isExecuteEvents()) {
-			
-		}
 	}
 
 	@Override
@@ -98,6 +96,15 @@ public class Accept extends GenericGui {
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
+	}
+	
+	@Override
+	public void removeComponents() {
+		ImageManager.removeImage(ImageId.WINDOW_ACCEPT_WINDOW);
+		ImageManager.removeImage(ImageId.WINDOW_ACCEPT_HEADER_TXT);
+		close.removeComponents();
+		question.removeComponents();
+		accept.removeComponents();
 	}
 
 	@Override

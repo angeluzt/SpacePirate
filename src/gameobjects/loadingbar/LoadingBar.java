@@ -21,12 +21,13 @@ public class LoadingBar extends GenericItem implements Drawable {
 
 	public LoadingBar(Point point, Size size) {
 		super(point, size);
-		
+
 		this.widthForLeftAndRightPortion = (int) (this.getSize().width * 0.1);
 		this.widthForCenter = (int) (this.getSize().width * 0.8);
-		
+
 		this.xForCenterPortion = (int) this.getPoint().getX() + this.widthForLeftAndRightPortion;
 		this.xForRightPortion = (int) this.getPoint().getX() + this.getSize().width - widthForLeftAndRightPortion;
+		
 		this.loadImages();
 	}
 
@@ -66,6 +67,14 @@ public class LoadingBar extends GenericItem implements Drawable {
 		ImageManager.addImage(right, new Size(widthForLeftAndRightPortion, heightForPortion));
 		ImageManager.addImage(table, this.getSize());
 	}
+	
+	@Override
+	public void removeComponents() {
+		ImageManager.removeImage(left);
+		ImageManager.removeImage(center);
+		ImageManager.removeImage(right);
+		ImageManager.removeImage(table);
+	}
 
 	@Override
 	public void drawElement(Graphics g) {
@@ -88,21 +97,33 @@ public class LoadingBar extends GenericItem implements Drawable {
 				(currentCenterPercent * widthForCenter) / 100, 
 				this.getSize().height, null);
 
-		if(this.isCompleted) {
+		if(isCompleted) {
 			g.drawImage(ImageManager.getImage(this.right), 
 					this.xForRightPortion, 
 					(int)this.getPoint().getY(), null);
 		}
 	}
 	
+	public int getCurrentCenterPercent() {
+		return this.currentCenterPercent;
+	}
+	
+	public void setCurrentCenterPercent(int currentCenterPercent) {
+		this.currentCenterPercent = currentCenterPercent;
+	}
+
 	public void increment(int increment) {
 		int tempSum = increment + this.currentCenterPercent;
 
 		if(tempSum <= 100) {
 			this.currentCenterPercent = tempSum;
 		} else {
-			this.currentCenterPercent = 100;
+			this.currentCenterPercent = 101;
 			this.isCompleted = true;
 		}
+	}
+	
+	public boolean isCompleted() {
+		return isCompleted;
 	}
 }

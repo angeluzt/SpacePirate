@@ -8,6 +8,7 @@ import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
 import utils.Bounds;
 import utils.CommonEvents;
+import utils.ImageManager;
 import utils.Size;
 import utils.Trigonometry;
 
@@ -17,12 +18,13 @@ public class Purchase extends GenericGui {
 	private ButtonWithActive question;
 	private ButtonWithActive accept;
 	
-	private Icon cristal;
+	private Icon cristal, title;
 	
 	public Purchase(Point point, Size size) {
-		super(ImageId.WINDOW_INFO_WINDOW, point, size);
+		super(ImageId.WINDOW_PURCHASE_WINDOW, point, size);
 
-		this.setShell();
+		//this.setShell();
+		this.pageLoaded = true;
 	}
 
 	@Override
@@ -84,7 +86,7 @@ public class Purchase extends GenericGui {
 		// window title: "information"
 		externalBounds = this.windowBounds.getRow(0).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(50, 60);
-		Icon title = new Icon(
+		title = new Icon(
 				ImageId.WINDOW_INFO_HEADER_TXT,
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize);
@@ -128,5 +130,16 @@ public class Purchase extends GenericGui {
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize.getSize()
 			);
+	}
+	
+	// DODO: Add unique id´s for this images
+	@Override
+	public void removeComponents() {
+		ImageManager.removeImage(ImageId.WINDOW_PURCHASE_WINDOW);
+		title.removeComponents();
+		cristal.removeComponents();
+		close.removeComponents();
+		question.removeComponents();
+		accept.removeComponents();
 	}
 }

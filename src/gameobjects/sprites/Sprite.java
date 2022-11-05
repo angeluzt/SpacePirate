@@ -51,4 +51,11 @@ public class Sprite extends GenericItem implements Drawable {
 		}
 
 	}
+	
+	@Override
+	public void removeComponents() {
+		for (int i = 0; i < spriteLength; i++) {
+			ImageManager.removeSpriteImage(baseId + this.currentSprite);
+		}
+	}
 }

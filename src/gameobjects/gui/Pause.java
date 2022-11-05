@@ -7,6 +7,7 @@ import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
 import utils.Bounds;
+import utils.ImageManager;
 import utils.Size;
 import utils.Trigonometry;
 
@@ -18,12 +19,13 @@ public class Pause extends GenericGui {
 	private ButtonWithActive accept;
 	private ButtonWithActive map;
 	
-	private Icon scoreTxt;
-	
+	private Icon scoreTxt, title;
+
 	public Pause(Point point, Size size) {
 		super(ImageId.WINDOW_PAUSE_PAUSE_WINDOW, point, size);
 
-		this.setShell();
+		//this.setShell();
+		this.pageLoaded = true;
 	}
 
 	@Override
@@ -71,7 +73,7 @@ public class Pause extends GenericGui {
 		// window title: "pause"
 		externalBounds = this.windowBounds.getRow(0).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(50, 60);
-		Icon title = new Icon(
+		title = new Icon(
 				ImageId.WINDOW_PAUSE_HEADER_TXT,
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize);
@@ -135,6 +137,19 @@ public class Pause extends GenericGui {
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
+	}
+	
+	@Override
+	public void removeComponents() {
+		ImageManager.removeImage(ImageId.WINDOW_PAUSE_PAUSE_WINDOW);
+		ImageManager.removeImage(ImageId.WINDOW_PAUSE_HEADER_TXT);
+		title.removeComponents();
+		scoreTxt.removeComponents();
+		map.removeComponents();
+		settings.removeComponents();
+		menu.removeComponents();
+		hangar.removeComponents();
+		accept.removeComponents();
 	}
 
 	@Override

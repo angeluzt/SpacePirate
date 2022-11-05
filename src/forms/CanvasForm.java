@@ -9,13 +9,10 @@ import java.util.List;
 import javax.swing.JComponent;
 
 import commoninterfaces.PropagateClick;
-import gameobjects.gui.Accept;
+import enums.ImageId;
 import gameobjects.gui.GenericGui;
-import gameobjects.gui.Purchase;
 import gameobjects.gui.MainMenuWindow;
-import gameobjects.gui.Pause;
-import gameobjects.gui.Information;
-import gameobjects.gui.YouWinLose;
+import gameobjects.gui.LoadingPage;
 import gameobjects.loadingbar.LoadingBar;
 import gameobjects.sprites.Sprite;
 import utils.Constants;
@@ -24,37 +21,31 @@ import utils.ImageUtils;
 import utils.Size;
 import weapons.Bullet;
 
-public class CanvasForm extends JComponent implements PropagateClick {
+public class CanvasForm extends JComponent implements PropagateClick, Runnable {
 
 	double vx = 210, vy = 10;
 	double objX = 50, objY = 50;
-	
+
 	ImageUtils image = ImageUtils.getImageUtils();
-	
+
 	List<Bullet> bullets = new ArrayList<>(); 
-	//Bullet bullet;
-	
-	LoadingBar loadingBar = new LoadingBar(new Point(400, 700), new Size(700, 80));
+
+	//LoadingBar loadingBar = new LoadingBar(new Point(400, 700), new Size(700, 80));
+	LoadingPage loadingPage;
 	GenericGui gui;
-	
+
 	Sprite sprite;
 	Sprite spriteUfo;
 	
-	Pause pause;
-	Purchase information;
-	Accept accept;
-	Information purchase;
-	YouWinLose youWin;
-	
-	MainMenuWindow menu = new MainMenuWindow(new Point(0, 0), new Size(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT));
+	MainMenuWindow menu;
 	private static final long serialVersionUID = 1L;
 
 	public CanvasForm() {
-		accept = new Accept(new Point(0, 0), new Size(300, 300));
-		purchase = new Information(new Point(300, 0), new Size(300, 300));
-		information = new Purchase(new Point(600, 0), new Size(300, 300));
-		pause = new Pause(new Point(900, 0), new Size(400, 350));
-		youWin = new YouWinLose(new Point(0, 350), new Size(400, 400));
+		Size fullScreen = new Size(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+		
+		loadingPage = new LoadingPage(new Point(0, 0), fullScreen);
+		menu = new MainMenuWindow(new Point(0, 0), fullScreen);
+
 		// TODO: Remove when testing is completed
 		for (int i = 1; i <= 10; i++) {
 			ImageManager.addSpriteImage("Missile1_Flying_" + i,
@@ -69,6 +60,9 @@ public class CanvasForm extends JComponent implements PropagateClick {
 		spriteUfo = new Sprite("Ufo_Regular_A_Explosion_", (short)9, new Point(800, 200), new Size(100, 400));
 
 		this.setDoubleBuffered(true);
+		
+		// start the loading bar animation, once completed show the menu
+		new Thread(this).start();
 	}
 	
 	public void repaintGame() {
@@ -86,16 +80,13 @@ public class CanvasForm extends JComponent implements PropagateClick {
 		}*/
 		
 		/*this.sprite.drawElement(g);
-		this.spriteUfo.drawElement(g);
-		this.loadingBar.drawElement(g);
-
-		this.accept.drawElement(g);
-		this.purchase.drawElement(g);
-		this.information.drawElement(g);
-		this.pause.drawElement(g);
-		this.youWin.drawElement(g);*/
+		this.spriteUfo.drawElement(g);*/
 		
 		this.menu.drawElement(g);
+
+		if(this.loadingPage != null) {
+			this.loadingPage.drawElement(g);
+		}
 	}
 
 	public void tick(double dt) {
@@ -112,13 +103,51 @@ public class CanvasForm extends JComponent implements PropagateClick {
 		this.loadingBar.increment(1);*/
 	}
 
-	public void propagateClick(Point point) {
-		/*this.accept.isElementClicked(point, null);
-		this.purchase.isElementClicked(point, null);
-		this.information.isElementClicked(point, null);
-		this.pause.isElementClicked(point, null);
-		this.youWin.isElementClicked(point, null);*/
-		
+	public void propagateClick(Point point) {		
 		this.menu.isElementClicked(point, null);
+	}
+	
+	public void propagateDrag(Point point) {
+		this.menu.dragElement(point, null);
+	}
+
+	@Override
+	public void run() {
+		while(true) {
+			if(this.menu != null && this.menu.isPageLoaded()) {
+				// star bar animation
+				int currentBarPercent = this.loadingPage.getCurrentCenterPercent();
+
+				while(!this.loadingPage.isCompleted()) {
+					this.loadingPage.setIncrement(1);
+					
+					currentBarPercent++;
+					
+					try {
+						Thread.sleep(30);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				// show the menu once the loading animation is completed
+				this.menu.setFocused(true);
+				this.menu.setVisible(true);
+				this.menu.startSound();
+				
+				
+				this.loadingPage.removeComponents();
+				this.loadingPage = null;
+				return;
+			}
+		}
 	}
 }

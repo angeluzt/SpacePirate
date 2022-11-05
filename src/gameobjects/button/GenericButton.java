@@ -5,8 +5,11 @@ import java.awt.Point;
 import commoninterfaces.Clickable;
 import commoninterfaces.Drawable;
 import enums.ImageId;
+import enums.Sounds;
 import gameobjects.gui.GenericGui;
+import utils.Constants;
 import utils.Size;
+import utils.Sound;
 import utils.Trigonometry;
 
 public class GenericButton extends Icon implements Drawable, Clickable, Runnable {
@@ -34,6 +37,8 @@ public class GenericButton extends Icon implements Drawable, Clickable, Runnable
 		boolean isClicket = Trigonometry.isPointInsideRegion(point, this);
 		
 		if(isClicket) {
+			new Sound().setFile(Sounds.BUTTON_CLICK, Constants.SOUND_EFFECTS_LEVEL).play();
+
 			this.referenceUI = currentUi;
 			this.isAnimationActive = true;
 			new Thread(this).start();

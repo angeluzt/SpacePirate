@@ -7,6 +7,10 @@ public class Bounds {
 	private Point location;
 	private Size size;
 	
+	public Bounds() {
+		
+	}
+
 	public Bounds(Point location, Size size) {
 		this.location = location;
 		this.size = size;
@@ -62,5 +66,10 @@ public class Bounds {
 	
 	public double getY() {
 		return this.location.getY();
+	}
+	
+	@Override
+	public String toString() {
+		return "{X = " + location.x + ", Y = " + location.y + " > Width = " + size.width + ", Height = " + size.height;
 	}
 }

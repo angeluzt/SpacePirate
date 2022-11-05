@@ -47,6 +47,12 @@ public class ButtonWithActive extends GenericButton {
 		}
 	}
 	
+	@Override
+	public void removeComponents() {
+		ImageManager.removeImage(imageId);
+		ImageManager.removeImage(imageActiveId);
+	}
+	
 	public ImageId getImageId() {
 		return imageActiveId;
 	}

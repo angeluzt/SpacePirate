@@ -8,17 +8,20 @@ import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
 import utils.Bounds;
 import utils.CommonEvents;
+import utils.ImageManager;
 import utils.Size;
 import utils.Trigonometry;
 
 public class Information extends GenericGui {
 
 	private ButtonWithActive accept;
+	private Icon title;
 
 	public Information(Point point, Size size) {
-		super(ImageId.WINDOW_PURCHASE_WINDOW, point, size);
+		super(ImageId.WINDOW_INFO_WINDOW, point, size);
 
-		this.setShell();
+		//this.setShell();
+		this.pageLoaded = true;
 	}
 
 	@Override
@@ -53,7 +56,7 @@ public class Information extends GenericGui {
 			CommonEvents.closeWindowOpenedOnTop(getReferenceUI(), this);
 			break;
 		}
-		
+		this.setReferenceUI(null);
 	}
 
 	@Override
@@ -65,13 +68,13 @@ public class Information extends GenericGui {
 		
 		this.windowBounds
 		.addRow(19, 1)
-		.addRow(40.5f, 1)
-		.addRow(40.5f, 3);
+		.addRow(50f, 1)
+		.addRow(31f, 3);
 		
 		// window title: "information"
 		externalBounds = this.windowBounds.getRow(0).getSquare(0).getBounds();
 		newSize = externalBounds.getScaledSize(50, 60);
-		Icon title = new Icon(
+		title = new Icon(
 				ImageId.WINDOW_INFO_HEADER_TXT,
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize);
@@ -86,6 +89,13 @@ public class Information extends GenericGui {
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize.getSize()
 			);
+	}
+	
+	@Override
+	public void removeComponents() {
+		ImageManager.removeImage(ImageId.WINDOW_INFO_WINDOW);
+		title.removeComponents();
+		accept.removeComponents();
 	}
 
 }

@@ -62,4 +62,6 @@ public abstract class GenericItem {
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
 	}
+	
+	public abstract void removeComponents();
 }

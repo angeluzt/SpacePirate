@@ -7,6 +7,7 @@ import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
 import utils.Bounds;
+import utils.ImageManager;
 import utils.Size;
 import utils.Trigonometry;
 
@@ -22,7 +23,7 @@ public class YouWinLose extends GenericGui {
 	public YouWinLose(Point point, Size size) {
 		super(ImageId.WINDOW_WINER_WINDOW, point, size);
 
-		this.setShell();
+		//this.setShell();
 	}
 
 	@Override
@@ -151,6 +152,21 @@ public class YouWinLose extends GenericGui {
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize
 			);
+	}
+	
+	@Override
+	public void removeComponents() {
+		ImageManager.removeImage(ImageId.WINDOW_WINER_WINDOW);
+		ImageManager.removeImage(ImageId.WINDOW_WINER_START_0_POINTS);
+		ImageManager.removeImage(ImageId.WINDOW_WINER_START_HALF_POINTS);
+		ImageManager.removeImage(ImageId.WINDOW_WINER_START_1_POINTS);
+		ImageManager.removeImage(ImageId.WINDOW_WINER_SCORE_TXT);
+		ImageManager.removeImage(ImageId.WINDOW_WINER_REPLAY_BTN);
+		ImageManager.removeImage(ImageId.WINDOW_WINER_REPLAY_ACT_BTN);
+		ImageManager.removeImage(ImageId.WINDOW_WINER_PLAY_BTN);
+		ImageManager.removeImage(ImageId.WINDOW_WINER_PLAY_ACT_BTN);
+		ImageManager.removeImage(ImageId.WINDOW_WINER_CLOSE_BTN);
+		ImageManager.removeImage(ImageId.WINDOW_WINER_CLOSE_ACT_BTN);
 	}
 	
 	// TODO

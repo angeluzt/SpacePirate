@@ -3,12 +3,13 @@ package forms;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 
 import utils.Constants;
 
-public class DeltaForm extends JFrame implements Runnable, MouseListener {
+public class DeltaForm extends JFrame implements Runnable, MouseListener, MouseMotionListener {
 
 	private static final long serialVersionUID = 1L;
 	CanvasForm gameManager;
@@ -46,7 +47,7 @@ public class DeltaForm extends JFrame implements Runnable, MouseListener {
         // #3: Add listeners
         this.addMouseListener(this);
         //this.addKeyListener(this);
-        //this.addMouseMotionListener(this);
+        this.addMouseMotionListener(this);
         
         new Thread(this).start();
     }
@@ -115,6 +116,17 @@ public class DeltaForm extends JFrame implements Runnable, MouseListener {
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		this.gameManager.propagateDrag(e.getPoint());
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

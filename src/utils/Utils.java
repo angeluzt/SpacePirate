@@ -20,6 +20,9 @@ public class Utils {
 	}
 	
 	public static void drawGridSystem(Graphics g, WindowSquare currentSquare) {
+		if(!Constants.SHOW_GRID) {
+			return;
+		}
 		g.setColor(Color.YELLOW);
 		if(currentSquare != null && currentSquare.getRows().size() > 0) {
 			for (WindowRow row: currentSquare.getRows()) {

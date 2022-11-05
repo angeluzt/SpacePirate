@@ -85,7 +85,7 @@ public enum ImageId {
 	WINDOW_MENU_BG("/Images/Gui/Main_Menu/BG.png"),
 	
 	// settings
-	// window menu
+	// window main menu
 	WINDOW_SETTINGS_HEADER_TXT("/Images/Gui/Setting/Header.png"),// TXT
 	WINDOW_SETTINGS_MUSIC_TXT("/Images/Gui/Setting/Music.png"),
 	WINDOW_SETTINGS_SOUND_TXT("/Images/Gui/Setting/Sound.png"),
@@ -95,6 +95,8 @@ public enum ImageId {
 	WINDOW_SETTINGS_CLOSE_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Close_BTN.png"),
 	WINDOW_SETTINGS_MENU_BTN("/Images/Gui/Buttons/Btns/Menu_BTN.png"),
 	WINDOW_SETTINGS_MENU_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Menu_BTN.png"),
+	WINDOW_SETTINGS_MORESETTINGS_BTN("/Images/Gui/Buttons/Btns/Menu_BTN.png"),
+	WINDOW_SETTINGS_MORESETTINGS_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Menu_BTN.png"),
 	WINDOW_SETTINGS_MUSIC_BTN("/Images/Gui/Buttons/Btns/Music_BTN.png"),
 	WINDOW_SETTINGS_MUSIC_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Music_BTN.png"),
 	WINDOW_SETTINGS_NOTIFICATIONS_BTN("/Images/Gui/Buttons/Btns/Notifications_BTN.png"),
@@ -104,10 +106,30 @@ public enum ImageId {
 	WINDOW_SETTINGS_SOUND_BTN("/Images/Gui/Buttons/Btns/Sound_BTN.png"),
 	WINDOW_SETTINGS_SOUND_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Sound_BTN.png"),
 	WINDOW_SETTINGS_WINDOW("/Images/Gui/Setting/Window_1.png"),
+	WINDOW_SETTINGS_DRAG_BAR_MUSIC_SOUND("/Images/Gui/Loading_Bar/LoadingBar1_Center.png"),
+	WINDOW_SETTINGS_DRAG_BAR_EFECTS_SOUND("/Images/Gui/Loading_Bar/LoadingBar2_Center.png"),
+	WINDOW_SETTINGS_DRAG_BAR_TABLE("/Images/Gui/Loading_Bar/Table.png"),
 	
-
+	
+	// window level selector
+	WINDOW_LEVEL_SELECTOR_BG("/Images/Gui/Main_Menu/BG.png"),
+	WINDOW_LEVEL_SELECTOR_LEFT_ARROW_BTN("/Images/Gui/Buttons/Btns/Backward_BTN.png"),
+	WINDOW_LEVEL_SELECTOR_LEFT_ARROW_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Backward_BTN.png"),
+	WINDOW_LEVEL_SELECTOR_RIGHT_ARROW_BTN("/Images/Gui/Buttons/Btns/Forward_BTN.png"),
+	WINDOW_LEVEL_SELECTOR_RIGHT_ARROW_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Forward_BTN.png"),
+	WINDOW_LEVEL_SELECTOR_CLOSE_BTN("/Images/Gui/Buttons/Btns/Close_BTN.png"),
+	WINDOW_LEVEL_SELECTOR_CLOSE_ACT_BTN("/Images/Gui/Buttons/Btns_Active/Close_BTN.png"),
+	WINDOW_LEVEL_SELECTOR_BTN_1("/Images/Gui/Level_Elements/Button_1.png"),
+	WINDOW_LEVEL_SELECTOR_BTN_2("/Images/Gui/Level_Elements/Button_2.png"),
+	WINDOW_LEVEL_SELECTOR_BTN_3("/Images/Gui/Level_Elements/Button_3.png"),
+	WINDOW_LEVEL_SELECTOR_BTN_4("/Images/Gui/Level_Elements/Button_4.png"),
+	
+	
+	
 	// OBJECTS
 	// Loading bars object
+	LOADING_SETTINGS_HEADER_TXT("/Images/Gui/Main_Menu/Header.png"),
+	LOADING1_BG("/Images/Gui/Main_Menu/BG.png"),
 	LOADING1_L("/Images/Gui/Loading_Bar/LoadingBar1_Left.png"),
 	LOADING1_C("/Images/Gui/Loading_Bar/LoadingBar1_Center.png"),
 	LOADING1_R("/Images/Gui/Loading_Bar/LoadingBar1_Right.png"),

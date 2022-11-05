@@ -5,32 +5,39 @@ import java.awt.Point;
 import java.util.Arrays;
 import java.util.List;
 
+import commoninterfaces.DragDrop;
 import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
+import gameobjects.dragbar.DragBar;
 import utils.Bounds;
 import utils.CommonEvents;
+import utils.ImageManager;
 import utils.Size;
 import utils.Trigonometry;
 
-public class Settings extends GenericGui {
+public class Settings extends GenericGui implements DragDrop {
+
 	private ButtonWithActive sound;
 	private ButtonWithActive music;
 	private ButtonWithActive notifications;
+	private ButtonWithActive moreSettings;
 	private ButtonWithActive ok;
 	private ButtonWithActive menu;
-	private ButtonWithActive close;
-	
+
 	private Icon settingsTxt;
 	private Icon soundTxt;
 	private Icon musicTxt;
 	private Icon notificationsTxt;
+	private Icon title;
+
+	private DragBar musicVolume;
+	private DragBar effectsVolume;
 
 	public Settings(Point point, Size size) {
 		super(ImageId.WINDOW_SETTINGS_WINDOW, point, size);
-		//this.setVisible(false);
-		
-		this.setShell();
+
+		this.pageLoaded = true;
 	}
 	
 	@Override
@@ -45,8 +52,9 @@ public class Settings extends GenericGui {
 		sound.drawElement(g);
 		notifications.drawElement(g);
 		ok.drawElement(g);
-		close.drawElement(g);
-		//.drawElement(g);
+		moreSettings.drawElement(g);
+		effectsVolume.drawElement(g);
+		musicVolume.drawElement(g);
 	}
 	
 	@Override
@@ -57,12 +65,29 @@ public class Settings extends GenericGui {
 		
 		// required to set the reference in every window, so we can show the previous window once we close this one
 		this.setReferenceUI(currentUi);
-		
+
 		music.isElementClicked(point, this);
 		sound.isElementClicked(point, this);
 		notifications.isElementClicked(point, this);
 		ok.isElementClicked(point, this);
-		close.isElementClicked(point, this);
+		moreSettings.isElementClicked(point, this);
+	}
+	
+	@Override
+	public void dragElement(Point point, GenericGui currentUi) {
+		if(!this.isFocused()) {
+			return;
+		}
+		effectsVolume.dragElement(point, currentUi);
+		musicVolume.dragElement(point, currentUi);
+	}
+	
+	public float getMusicSound() {
+		return this.musicVolume.getActualValue();
+	}
+	
+	public float getEffectsSound() {
+		return this.effectsVolume.getActualValue();
 	}
 	
 	@Override
@@ -78,20 +103,10 @@ public class Settings extends GenericGui {
 				
 				break;
 			case WINDOW_SETTINGS_OK_BTN: 
-				//this.setVisible(false);
-				//this.setFocused(false);
-				
-				// Logic when settings saved
-				
-				// reset reference ui
-				//this.getReferenceUI().setFocused(true);
+
 				CommonEvents.closeWindowOpenedOnTop(getReferenceUI(), this);
 				break;
 			case WINDOW_SETTINGS_CLOSE_BTN: 
-				/*this.setVisible(false);
-				this.setFocused(false);
-				
-				this.getReferenceUI().setFocused(true);*/
 				CommonEvents.closeWindowOpenedOnTop(getReferenceUI(), this);
 				break;
 		}
@@ -106,15 +121,16 @@ public class Settings extends GenericGui {
 		List<Double> margin =  Arrays.asList(20d, 80d);
 		this.windowBounds
 		.addRow(11, 1)
-		.addRowWithColumnPercent(20f, 2, margin)
-		.addRowWithColumnPercent(20f, 2, margin)
-		.addRowWithColumnPercent(20f, 2, margin)
-		.addRow(29f, 2);
+		.addRowWithColumnPercent(15f, 2, margin)
+		.addRowWithColumnPercent(15f, 2, margin)
+		.addRowWithColumnPercent(15f, 2, margin)
+		.addRowWithColumnPercent(15f, 2, margin)
+		.addRow(29f, 1);
 		
 		// window title: "accept"
 		externalBounds = this.windowBounds.getRow(0).getSquare(0).getBounds();
 		buttonSize = externalBounds.getScaledSize(50, 60);
-		Icon title = new Icon(
+		title = new Icon(
 				ImageId.WINDOW_SETTINGS_HEADER_TXT,
 				Trigonometry.centerSquareInsideanother(externalBounds, buttonSize), 
 				buttonSize);
@@ -130,6 +146,12 @@ public class Settings extends GenericGui {
 				buttonSize
 			);
 		
+		Point volumeLocation = this.windowBounds.getRow(1).getSquare(1).getPoint();
+		Size volumeSize = this.windowBounds.getRow(1).getSquare(1).getBounds().getScaledSize(97, 60);
+		effectsVolume = new DragBar(ImageId.WINDOW_SETTINGS_DRAG_BAR_EFECTS_SOUND,
+				Trigonometry.leftCenterSquareInsideanother(this.windowBounds.getRow(1).getSquare(1).getBounds(), volumeSize), 
+				volumeSize);
+		
 		// music
 		externalBounds = this.windowBounds.getRow(2).getSquare(0).getBounds();
 		music = new ButtonWithActive(
@@ -139,6 +161,12 @@ public class Settings extends GenericGui {
 				buttonSize
 			);
 		
+		volumeLocation = this.windowBounds.getRow(2).getSquare(1).getPoint();
+		//Size volumeSize = this.windowBounds.getRow(1).getSquare(1).getBounds().getScaledSize(98, 100);
+		musicVolume = new DragBar(ImageId.WINDOW_SETTINGS_DRAG_BAR_MUSIC_SOUND,
+				Trigonometry.leftCenterSquareInsideanother(this.windowBounds.getRow(2).getSquare(1).getBounds(), volumeSize),
+				volumeSize);
+
 		// notifications
 		externalBounds = this.windowBounds.getRow(3).getSquare(0).getBounds();
 		notifications = new ButtonWithActive(
@@ -147,24 +175,35 @@ public class Settings extends GenericGui {
 				Trigonometry.centerSquareInsideanother(externalBounds, buttonSize), 
 				buttonSize
 			);
+		// show more settings
+		externalBounds = this.windowBounds.getRow(4).getSquare(0).getBounds();
+		moreSettings = new ButtonWithActive(
+				ImageId.WINDOW_SETTINGS_MORESETTINGS_BTN, 
+				ImageId.WINDOW_SETTINGS_MORESETTINGS_ACT_BTN, 
+				Trigonometry.centerSquareInsideanother(externalBounds, buttonSize), 
+				buttonSize
+			);
 		
 		// ok
-		externalBounds = this.windowBounds.getRow(4).getSquare(0).getBounds();
+		externalBounds = this.windowBounds.getRow(5).getSquare(0).getBounds();
 		ok = new ButtonWithActive(
 				ImageId.WINDOW_SETTINGS_OK_BTN, 
 				ImageId.WINDOW_SETTINGS_OK_ACT_BTN, 
 				Trigonometry.centerSquareInsideanother(externalBounds, buttonSize), 
 				buttonSize
 			);
-		
-		// ok
-		externalBounds = this.windowBounds.getRow(4).getSquare(1).getBounds();
-		close = new ButtonWithActive(
-				ImageId.WINDOW_SETTINGS_CLOSE_BTN, 
-				ImageId.WINDOW_SETTINGS_CLOSE_ACT_BTN, 
-				Trigonometry.centerSquareInsideanother(externalBounds, buttonSize), 
-				buttonSize
-			);
 	}
-
+	
+	@Override
+	public void removeComponents() {
+		ImageManager.removeImage(ImageId.WINDOW_SETTINGS_WINDOW);
+		title.removeComponents();
+		sound.removeComponents();
+		effectsVolume.removeComponents();
+		music.removeComponents();
+		musicVolume.removeComponents();
+		notifications.removeComponents();
+		moreSettings.removeComponents();
+		ok.removeComponents();
+	}
 }

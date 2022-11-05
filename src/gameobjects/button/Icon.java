@@ -21,8 +21,22 @@ public class Icon extends GenericItem implements Drawable {
 
 	public Icon(ImageId imageId, Point point, Size size) {
 		super(point, size);
-		ImageManager.addSmoothImage(imageId, size);
+		
+		/*if(ImageManager.containsImage(imageId)) {
+			ImageManager.removeImage(imageId);
+		}
+
+		ImageManager.addSmoothImage(imageId, size);*/
 		this.imageId = imageId;
+		this.resizeImageIfExists();
+	}
+	
+	public void resizeImageIfExists() {
+		if(ImageManager.containsImage(imageId)) {
+			ImageManager.removeImage(imageId);
+		}
+
+		ImageManager.addSmoothImage(imageId, this.getSize());
 	}
 	
 	public Icon(ImageId imageId, Point point, int size) {
@@ -69,5 +83,10 @@ public class Icon extends GenericItem implements Drawable {
 					this.getBounds().getHeight());*/
 		}
 
+	}
+
+	@Override
+	public void removeComponents() {
+		ImageManager.removeImage(imageId);
 	}
 }

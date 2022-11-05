@@ -20,6 +20,7 @@ public abstract class GenericGui extends GenericItem implements Drawable, Trigge
 	private Icon windowTitle;
 	private boolean focused;
 	private boolean executeEvents;
+	protected boolean pageLoaded;
 
 	protected WindowSquare windowBounds;
 	private GenericGui referenceUI;
@@ -30,13 +31,23 @@ public abstract class GenericGui extends GenericItem implements Drawable, Trigge
 		this.windowId = windowId;
 		this.focused = false;
 		this.executeEvents = false;
-
-		ImageManager.addImage(windowId, size);
+		this.pageLoaded = false;
 		
 		this.windowBounds = new WindowSquare(point, size);
 		
+		resizeImageIfExists();
 		// the default behavior is when not visible
 		this.setVisible(false);
+		this.setShell();
+		
+		this.pageLoaded = true;
+	}
+	
+	public void resizeImageIfExists() {
+		if(ImageManager.containsImage(windowId)) {
+			ImageManager.removeImage(windowId);
+		}
+		ImageManager.addImage(windowId, this.getSize());
 	}
 
 	public ImageId getWindowId() {
@@ -69,6 +80,10 @@ public abstract class GenericGui extends GenericItem implements Drawable, Trigge
 
 	public void setFocused(boolean focused) {
 		this.focused = focused;
+	}
+
+	public boolean isPageLoaded() {
+		return pageLoaded;
 	}
 
 	public boolean isExecuteEvents() {
@@ -105,4 +120,5 @@ public abstract class GenericGui extends GenericItem implements Drawable, Trigge
 	}
 
 	public abstract void setShell();
+	public abstract void removeComponents();
 }
