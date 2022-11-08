@@ -9,6 +9,12 @@ import javax.swing.JFrame;
 
 import utils.Constants;
 
+/**
+ * Main frame that handles Delta time and also detect every user interaction with the screen
+ * example: clicks, listeners, events, etc.
+ * @author angel
+ *
+ */
 public class DeltaForm extends JFrame implements Runnable, MouseListener, MouseMotionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -52,14 +58,19 @@ public class DeltaForm extends JFrame implements Runnable, MouseListener, MouseM
         new Thread(this).start();
     }
 
-    int speed = 40;
-    int distance = 10;
-    double tickTime = 0;
-
-    int currentStep = 0;
-    double deltaTime = 0;
+    private int speed = 40;
+    private int distance = 10;
+    private double tickTime = 0;
+    private boolean enableTimeCount = false;
+    
+    /**
+     * This run method handles the Delta Time, this is what brings the game to live since is the main loop.
+     */
 	@Override
 	public void run() {
+		long startTime = 0;
+		long elapsedTime;
+
 		while(!quit) {
 			long currentTime = System.nanoTime();
 	        this.deltaUps += (currentTime - this.initialTime) / this.timeUps;
@@ -67,29 +78,26 @@ public class DeltaForm extends JFrame implements Runnable, MouseListener, MouseM
 	
 	        this.initialTime = currentTime;
 	
-	        // UPS
+	        // UPS - Update Per Second
 		    if(this.deltaUps >= 1){
-
-		    	//long startTime = System.nanoTime();
-		    	// Calculate the delta time (local time between each step)
-		    	// the figures will move the same amount of distance in 1 UPS or 300 UPS
-		    	currentStep += Constants.NANO_SECOND;
-		    	deltaTime += currentStep/timeUps;
-
-		    	this.gameManager.tick(deltaTime);
-
-			    if(currentStep >= UPS) {
-			    	deltaTime = 0;
-			    	currentStep = 0;
-			    }
-		    	
+		    	if(enableTimeCount) {
+		    		startTime = System.nanoTime();
+		    	}
+		    	/** 
+		    	 * the objects will move the same amount of distance in 1 UPS or 300 UPS
+		    	 * d = s/t, considering UPS as time, then distance = speed/UPS will result 
+		    	 * in a fraction of distance every second
+		    	 */
+		    	this.gameManager.tick(UPS);
 		    	this.deltaUps = 0;
-		        //long elapsedTime = System.nanoTime() - startTime;
-
-		        //System.out.println("Total execution time to create 1000K objects in Java in millis: " + elapsedTime/1000000);
+		    	
+		    	if(enableTimeCount) {
+			        elapsedTime = System.nanoTime() - startTime;
+			        System.out.println("Total execution time to create 1000K objects in Java in millis: " + elapsedTime/1000000);
+		    	}
 		    }
 
-	        // FPS
+	        // FPS - Frames Per Second
 		    if(this.deltaFps >= 1) {
 		    	this.gameManager.repaintGame();
 		    	this.deltaFps = 0;

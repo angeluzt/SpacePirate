@@ -26,17 +26,13 @@ public class MainMenuWindow extends GenericGui implements DragDrop {
 	private ButtonWithActive moreGames, record, FAQ;
 
 	private Settings settingsWindow;
-	//private Purchase purchase;
 	private Information informationWindow; 
 	private LevelSelector levelSelector;
-	
+
 	private Sound backgroundSound;
-	
-	private final String infoTxt = "Wellcome to Space GUI, ";
 
 	public MainMenuWindow(Point point, Size size) {
 		super(ImageId.WINDOW_MENU_BG, point, size);
-		
 	}
 
 	private void initSettings() {
@@ -48,11 +44,15 @@ public class MainMenuWindow extends GenericGui implements DragDrop {
 	}
 
 	private void initInformation() {
+		String mainMenuInfoTxt = "Wellcome to Space Game GUI, we need you to help the prisoners to escape from the infinite space loop. "
+				+ "Complete the levels and collect the crystals to get stronger weapons and abilities. ¡Have fun!";
+
 		Size newSize = this.getBounds().getScaledSize(25, 45);
 		informationWindow = new Information(
 				Trigonometry.centerSquareInsideanother(this.getBounds(), newSize),  
 				newSize
 		);
+		this.informationWindow.setText(mainMenuInfoTxt + mainMenuInfoTxt + mainMenuInfoTxt + mainMenuInfoTxt);
 	}
 
 	private void initLevelSelector() {
@@ -99,11 +99,11 @@ public class MainMenuWindow extends GenericGui implements DragDrop {
 			return;
 		} else {
 			// detect clicks in internal windows
-			if(settingsWindow != null) 
+			if(settingsWindow != null && settingsWindow.isFocused()) 
 				settingsWindow.isElementClicked(point, this);
-			if(informationWindow != null) 
+			if(informationWindow != null && informationWindow.isFocused()) 
 				informationWindow.isElementClicked(point, this);
-			if(levelSelector != null) 
+			if(levelSelector != null && levelSelector.isFocused()) 
 				levelSelector.isElementClicked(point, this);
 		}
 	}

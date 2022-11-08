@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import enums.Sounds;
 
 public class Constants {
-	public static boolean SHOW_GRID = true;
+	public static boolean SHOW_GRID = false;
 	
     public static final int WINDOW_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getSize().width;
     public static final int WINDOW_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getSize().height;

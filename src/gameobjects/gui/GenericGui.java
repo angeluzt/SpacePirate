@@ -14,6 +14,13 @@ import utils.ImageManager;
 import utils.Size;
 import utils.Utils;
 
+/**
+ * All the windows extends GenericGui
+ * 
+ * 
+ * @author angel
+ *
+ */
 public abstract class GenericGui extends GenericItem implements Drawable, TriggerEvent, Clickable {
 
 	private ImageId windowId;

@@ -6,6 +6,7 @@ import java.awt.Point;
 import enums.ImageId;
 import gameobjects.button.ButtonWithActive;
 import gameobjects.button.Icon;
+import gameobjects.textarea.InfoTextArea;
 import utils.Bounds;
 import utils.CommonEvents;
 import utils.ImageManager;
@@ -16,12 +17,18 @@ public class Information extends GenericGui {
 
 	private ButtonWithActive accept;
 	private Icon title;
+	Size newSize = new Size(600, 300);
+	Point newPoint = new Point(0, 50);
+	private InfoTextArea infoText;
 
 	public Information(Point point, Size size) {
 		super(ImageId.WINDOW_INFO_WINDOW, point, size);
 
-		//this.setShell();
 		this.pageLoaded = true;
+	}
+	
+	public void setText(String currentInfoTXT) {
+		infoText.splitContent(currentInfoTXT);
 	}
 
 	@Override
@@ -33,6 +40,7 @@ public class Information extends GenericGui {
 		}
 
 		accept.drawElement(g);
+		this.infoText.drawElement(g);
 		
 	}
 
@@ -46,6 +54,7 @@ public class Information extends GenericGui {
 		this.setReferenceUI(currentUi);
 
 		accept.isElementClicked(point, this);
+		infoText.isElementClicked(point, null);
 	}
 	
 	@Override
@@ -79,6 +88,12 @@ public class Information extends GenericGui {
 				Trigonometry.centerSquareInsideanother(externalBounds, newSize), 
 				newSize);
 		this.setWindowHeader(title);
+		
+		String infoTxt = "1234567890";
+		externalBounds = this.windowBounds.getRow(1).getSquare(0).getBounds();
+		newSize = externalBounds.getScaledSize(94, 94);
+
+		this.infoText = new InfoTextArea(new Bounds(Trigonometry.centerSquareInsideanother(externalBounds, newSize), newSize));
 	
 		// accept
 		externalBounds = this.windowBounds.getRow(2).getSquare(1).getBounds();

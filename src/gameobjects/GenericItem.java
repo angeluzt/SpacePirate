@@ -6,6 +6,13 @@ import utils.Bounds;
 import utils.Constants;
 import utils.Size;
 
+/**
+ * Most of the objects extends this class because they have in common
+ * a size, a location and the visibility, as well as the id.
+ * 
+ * @author angel
+ *
+ */
 public abstract class GenericItem {
 	private int id = Constants.NEXT_ID.getAndIncrement();
 	private Bounds bounds;
