@@ -7,10 +7,13 @@ import java.awt.Polygon;
 
 import commoninterfaces.DragDrop;
 import commoninterfaces.Drawable;
+import enums.Sounds;
 import gameobjects.GenericItem;
 import gameobjects.gui.GenericGui;
 import utils.Bounds;
+import utils.Constants;
 import utils.Size;
+import utils.Sound;
 
 public class Scroll extends GenericItem implements DragDrop, Drawable {
 	private int scrollInternalHight;
@@ -61,9 +64,9 @@ public class Scroll extends GenericItem implements DragDrop, Drawable {
 		g.setColor(Color.BLACK);
 		g.fillRect(this.getPoint().x, this.getPoint().y, this.getSize().width, this.getSize().height);
 		
-		/*g.setColor(Color.MAGENTA);
+		g.setColor(Color.GRAY);
 		g.fillRect(p1.x, p1.y, s1.width, s1.width);
-		g.fillRect(p2.x, p2.y, s2.width, s2.width);*/
+		g.fillRect(p2.x, p2.y, s2.width, s2.width);
 		
 		g.setColor(Color.RED);
 		g.fillPolygon(upTriangle);
@@ -73,6 +76,7 @@ public class Scroll extends GenericItem implements DragDrop, Drawable {
 	public boolean upClicked(Point point) {
 		if(upTriangle.contains(point)) {
 			System.out.println("Up clicked");
+			new Sound().setFile(Sounds.BUTTON_CLICK, Constants.SOUND_EFFECTS_LEVEL).play();
 			return true;
 		}
 		return false;
@@ -81,6 +85,7 @@ public class Scroll extends GenericItem implements DragDrop, Drawable {
 	public boolean downClicked(Point point) {
 		if(downTriangle.contains(point)) {
 			System.out.println("Down clicked");
+			new Sound().setFile(Sounds.BUTTON_CLICK, Constants.SOUND_EFFECTS_LEVEL).play();
 			return true;
 		}
 		return false;

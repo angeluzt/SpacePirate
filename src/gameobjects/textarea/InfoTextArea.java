@@ -58,10 +58,10 @@ public class InfoTextArea extends GenericItem implements Drawable, Clickable  {
 			// collect word
 			case 0:
 				if(!Character.isSpaceChar(content.charAt(index))) {
-					System.out.println(content.charAt(index));
+					//System.out.println(content.charAt(index));
 					currentWord.append(content.charAt(index));
 				} else {
-					System.out.println("Empty space");
+					//System.out.println("Empty space");
 					state = 1;
 					index--;
 				}
@@ -80,7 +80,7 @@ public class InfoTextArea extends GenericItem implements Drawable, Clickable  {
 				// the current word + space is not higher than 45 characters
 				} else {
 					currentLine.append(currentWord.toString() + content.charAt(index));
-					System.out.println(currentLine);
+					//System.out.println(currentLine);
 
 					currentWord.setLength(0);
 				}

@@ -3,6 +3,9 @@ package forms;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JComponent;
 
 import commoninterfaces.PropagateClick;
@@ -14,6 +17,8 @@ import utils.Constants;
 import utils.ImageManager;
 import utils.ImageUtils;
 import utils.Size;
+import utils.Trigonometry;
+import weapons.Bullet;
 
 /**
  * This file contains the canvas, and the main function is to propagate the clicks, events, delta time,
@@ -29,7 +34,7 @@ public class CanvasForm extends JComponent implements PropagateClick, Runnable {
 
 	ImageUtils image = ImageUtils.getImageUtils();
 
-	//List<Bullet> bullets = new ArrayList<>(); 
+	List<Bullet> bullets = new ArrayList<>(); 
 	LoadingPage loadingPage;
 	GenericGui gui;
 
@@ -86,10 +91,10 @@ public class CanvasForm extends JComponent implements PropagateClick, Runnable {
 			this.loadingPage.drawElement(g);
 		}
 
-		/*g.setColor(Color.RED);
+		g.setColor(Color.RED);
 		for(int i = 0; i < this.bullets.size(); i++) {
 			this.bullets.get(i).paintBullet(g);
-		}*/
+		}
 	}
 
 	/**
@@ -130,7 +135,7 @@ public class CanvasForm extends JComponent implements PropagateClick, Runnable {
 	 */
 	public void tick(double dt) {
 
-		/*for(int i = 0; i < this.bullets.size(); i++) {
+		for(int i = 0; i < this.bullets.size(); i++) {
 			this.bullets.get(i).update(dt);
 		}
 		
@@ -141,11 +146,23 @@ public class CanvasForm extends JComponent implements PropagateClick, Runnable {
 		this.loadingBar.increment(1);*/
 	}
 
-	public void propagateClick(Point point) {		
+	public void propagateClick(Point point) {
+		double xBullet = Constants.WINDOW_WIDTH / 2, yBullet = Constants.WINDOW_HEIGHT / 2;
+		double angle = Trigonometry.getAngleBetweenTwoPoints( point.x, point.y, xBullet, yBullet);
+		//System.out.println("Angle: " + angle);
+		bullets.add(
+				new Bullet(
+						xBullet, yBullet, 
+						angle, 
+						400));
 		this.menu.isElementClicked(point, null);
 	}
 	
 	public void propagateDrag(Point point) {
+		//System.out.println(point.x + "_" + point.y);
+		for (Bullet bullet: bullets) {
+			bullet.setAngle(Trigonometry.getAngleBetweenTwoPoints(point.x, point.y, bullet.x, bullet.y));
+		}
 		this.menu.dragElement(point, null);
 	}
 

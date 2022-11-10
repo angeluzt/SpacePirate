@@ -1,7 +1,6 @@
 package weapons;
 
 import java.awt.Graphics;
-import java.awt.Point;
 
 /**
  * Code based on code from user: Fluidic Ice
@@ -10,10 +9,10 @@ import java.awt.Point;
  *
  */
 public class Bullet {
-    private double x, y;
+    public double x, y;
     private int speed;
     private double directionAngle;
-    private int length = 10;
+    private int length = 30;
 
     public Bullet(double x, double y, double directionAngle, int speed)
     {
@@ -28,6 +27,10 @@ public class Bullet {
     	// Divide the speed between the delta time(each dt represents a portion of game time, something like delta seconds)
     	x += lengthdir_x(speed/dt, directionAngle);
         y += lengthdir_y(speed/dt, directionAngle);
+    }
+    
+    public void setAngle(double directionAngle) {
+    	this.directionAngle = directionAngle;
     }
     
     public void paintBullet(Graphics g) {
