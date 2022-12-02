@@ -115,7 +115,7 @@ public class DeltaForm extends JFrame implements Runnable, MouseListener, MouseM
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-
+		this.gameManager.stopLaser();
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
